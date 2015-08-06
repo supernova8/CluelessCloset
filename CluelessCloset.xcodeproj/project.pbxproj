@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		2D2EF73C1B715BC3009D0F96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF73B1B715BC3009D0F96 /* AppDelegate.swift */; };
-		2D2EF73E1B715BC3009D0F96 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF73D1B715BC3009D0F96 /* FirstViewController.swift */; };
+		2D2EF73E1B715BC3009D0F96 /* ClosetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF73D1B715BC3009D0F96 /* ClosetViewController.swift */; };
 		2D2EF7401B715BC3009D0F96 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF73F1B715BC3009D0F96 /* SecondViewController.swift */; };
 		2D2EF7431B715BC3009D0F96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D2EF7411B715BC3009D0F96 /* Main.storyboard */; };
 		2D2EF7451B715BC3009D0F96 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D2EF7441B715BC3009D0F96 /* Images.xcassets */; };
 		2D2EF7481B715BC3009D0F96 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D2EF7461B715BC3009D0F96 /* LaunchScreen.xib */; };
 		2D2EF7541B715BC3009D0F96 /* CluelessClosetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7531B715BC3009D0F96 /* CluelessClosetTests.swift */; };
+		2D2EF7601B715E19009D0F96 /* SelfieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF75F1B715E19009D0F96 /* SelfieViewController.swift */; };
+		2D2EF7621B724DB3009D0F96 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7611B724DB3009D0F96 /* DetailViewController.swift */; };
+		2D2EF7651B724FF0009D0F96 /* CluelessCloset.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7631B724FF0009D0F96 /* CluelessCloset.xcdatamodeld */; };
+		2D2EF77D1B72DCE9009D0F96 /* Closets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF77C1B72DCE9009D0F96 /* Closets.swift */; };
+		2D2EF77F1B72DCF9009D0F96 /* Looks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF77E1B72DCF9009D0F96 /* Looks.swift */; };
+		2D2EF7811B72DD0A009D0F96 /* LookDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7801B72DD0A009D0F96 /* LookDates.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +36,7 @@
 		2D2EF7361B715BC3009D0F96 /* CluelessCloset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CluelessCloset.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D2EF73A1B715BC3009D0F96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D2EF73B1B715BC3009D0F96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2D2EF73D1B715BC3009D0F96 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		2D2EF73D1B715BC3009D0F96 /* ClosetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetViewController.swift; sourceTree = "<group>"; };
 		2D2EF73F1B715BC3009D0F96 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		2D2EF7421B715BC3009D0F96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D2EF7441B715BC3009D0F96 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -38,6 +44,12 @@
 		2D2EF74D1B715BC3009D0F96 /* CluelessClosetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CluelessClosetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D2EF7521B715BC3009D0F96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D2EF7531B715BC3009D0F96 /* CluelessClosetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CluelessClosetTests.swift; sourceTree = "<group>"; };
+		2D2EF75F1B715E19009D0F96 /* SelfieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfieViewController.swift; sourceTree = "<group>"; };
+		2D2EF7611B724DB3009D0F96 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		2D2EF7641B724FF0009D0F96 /* CluelessCloset.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CluelessCloset.xcdatamodel; sourceTree = "<group>"; };
+		2D2EF77C1B72DCE9009D0F96 /* Closets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Closets.swift; sourceTree = "<group>"; };
+		2D2EF77E1B72DCF9009D0F96 /* Looks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Looks.swift; sourceTree = "<group>"; };
+		2D2EF7801B72DD0A009D0F96 /* LookDates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookDates.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +92,15 @@
 			isa = PBXGroup;
 			children = (
 				2D2EF73B1B715BC3009D0F96 /* AppDelegate.swift */,
-				2D2EF73D1B715BC3009D0F96 /* FirstViewController.swift */,
+				2D2EF75F1B715E19009D0F96 /* SelfieViewController.swift */,
+				2D2EF73D1B715BC3009D0F96 /* ClosetViewController.swift */,
 				2D2EF73F1B715BC3009D0F96 /* SecondViewController.swift */,
+				2D2EF7611B724DB3009D0F96 /* DetailViewController.swift */,
 				2D2EF7411B715BC3009D0F96 /* Main.storyboard */,
+				2D2EF7631B724FF0009D0F96 /* CluelessCloset.xcdatamodeld */,
+				2D2EF77C1B72DCE9009D0F96 /* Closets.swift */,
+				2D2EF77E1B72DCF9009D0F96 /* Looks.swift */,
+				2D2EF7801B72DD0A009D0F96 /* LookDates.swift */,
 				2D2EF7441B715BC3009D0F96 /* Images.xcassets */,
 				2D2EF7461B715BC3009D0F96 /* LaunchScreen.xib */,
 				2D2EF7391B715BC3009D0F96 /* Supporting Files */,
@@ -215,9 +233,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D2EF7601B715E19009D0F96 /* SelfieViewController.swift in Sources */,
+				2D2EF7811B72DD0A009D0F96 /* LookDates.swift in Sources */,
+				2D2EF77D1B72DCE9009D0F96 /* Closets.swift in Sources */,
 				2D2EF7401B715BC3009D0F96 /* SecondViewController.swift in Sources */,
+				2D2EF7621B724DB3009D0F96 /* DetailViewController.swift in Sources */,
+				2D2EF7651B724FF0009D0F96 /* CluelessCloset.xcdatamodeld in Sources */,
 				2D2EF73C1B715BC3009D0F96 /* AppDelegate.swift in Sources */,
-				2D2EF73E1B715BC3009D0F96 /* FirstViewController.swift in Sources */,
+				2D2EF77F1B72DCF9009D0F96 /* Looks.swift in Sources */,
+				2D2EF73E1B715BC3009D0F96 /* ClosetViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +447,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2D2EF7631B724FF0009D0F96 /* CluelessCloset.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2D2EF7641B724FF0009D0F96 /* CluelessCloset.xcdatamodel */,
+			);
+			currentVersion = 2D2EF7641B724FF0009D0F96 /* CluelessCloset.xcdatamodel */;
+			path = CluelessCloset.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2D2EF72E1B715BC3009D0F96 /* Project object */;
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Closets" representedClassName="Closets" syncable="YES">
+        <attribute name="closetDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="closetName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateUpdated" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="relationshipClosetLooks" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Looks" inverseName="relationshipLookCloset" inverseEntity="Looks" syncable="YES"/>
+    </entity>
+    <entity name="LookDates" representedClassName="LookDates" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateOccasion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateUpdated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateWorn" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="relationshipLookDateLook" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Looks" inverseName="relationshipLookLookDates" inverseEntity="Looks" syncable="YES"/>
+    </entity>
+    <entity name="Looks" representedClassName="Looks" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateUpdated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lookAccessoryType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lookArchive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lookBottomType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lookDressType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lookFave" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lookImageName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lookName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lookNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lookOuterwearType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lookSeason" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lookShoeType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lookTags" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lookTopType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="relationshipLookCloset" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Closets" inverseName="relationshipClosetLooks" inverseEntity="Closets" syncable="YES"/>
+        <relationship name="relationshipLookLookDates" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="LookDates" inverseName="relationshipLookDateLook" inverseEntity="LookDates" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Closets" positionX="234" positionY="35" width="128" height="118"/>
+        <element name="Looks" positionX="-36" positionY="45" width="128" height="298"/>
+        <element name="LookDates" positionX="178" positionY="288" width="128" height="118"/>
+    </elements>
+</model>
