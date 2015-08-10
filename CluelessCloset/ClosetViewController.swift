@@ -36,7 +36,7 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //Record 1
         newLook.lookName = "Country Chic"
         newLook.lookNumber = 1 as Int
-        newLook.lookSeason = 0 as Int
+        newLook.lookSeason = "Summer"
         newLook.lookFave = false
         newLook.dateAdded = NSDate()
         newLook.dateUpdated = NSDate()

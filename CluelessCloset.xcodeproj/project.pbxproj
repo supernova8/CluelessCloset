@@ -18,8 +18,18 @@
 		2D2EF7621B724DB3009D0F96 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7611B724DB3009D0F96 /* DetailViewController.swift */; };
 		2D2EF7651B724FF0009D0F96 /* CluelessCloset.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7631B724FF0009D0F96 /* CluelessCloset.xcdatamodeld */; };
 		2D2EF77D1B72DCE9009D0F96 /* Closets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF77C1B72DCE9009D0F96 /* Closets.swift */; };
-		2D2EF77F1B72DCF9009D0F96 /* Looks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF77E1B72DCF9009D0F96 /* Looks.swift */; };
 		2D2EF7811B72DD0A009D0F96 /* LookDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7801B72DD0A009D0F96 /* LookDates.swift */; };
+		2D2EF7831B73BA13009D0F96 /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7821B73BA13009D0F96 /* PhotoTableViewCell.swift */; };
+		2D2EF7851B73BD41009D0F96 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7841B73BD41009D0F96 /* TextFieldTableViewCell.swift */; };
+		2D2EF7871B73BE49009D0F96 /* SegControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7861B73BE49009D0F96 /* SegControlTableViewCell.swift */; };
+		2D2EF7891B73E496009D0F96 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7881B73E496009D0F96 /* LabelTableViewCell.swift */; };
+		2D2EF78B1B73E679009D0F96 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF78A1B73E679009D0F96 /* DatePickerTableViewCell.swift */; };
+		2D2EF78D1B73E80C009D0F96 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF78C1B73E80C009D0F96 /* TextViewTableViewCell.swift */; };
+		2D2EF78F1B73E89A009D0F96 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF78E1B73E89A009D0F96 /* ButtonTableViewCell.swift */; };
+		2D2EF7961B75402A009D0F96 /* DoubleSegControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7951B75402A009D0F96 /* DoubleSegControlTableViewCell.swift */; };
+		2D2EF7981B78EDC5009D0F96 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7971B78EDC5009D0F96 /* TabBarViewController.swift */; };
+		2D2EF79A1B78FD7B009D0F96 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7991B78FD7B009D0F96 /* Settings.swift */; };
+		2D2EF79E1B793FD1009D0F96 /* Looks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF79D1B793FD1009D0F96 /* Looks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +58,18 @@
 		2D2EF7611B724DB3009D0F96 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		2D2EF7641B724FF0009D0F96 /* CluelessCloset.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CluelessCloset.xcdatamodel; sourceTree = "<group>"; };
 		2D2EF77C1B72DCE9009D0F96 /* Closets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Closets.swift; sourceTree = "<group>"; };
-		2D2EF77E1B72DCF9009D0F96 /* Looks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Looks.swift; sourceTree = "<group>"; };
 		2D2EF7801B72DD0A009D0F96 /* LookDates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookDates.swift; sourceTree = "<group>"; };
+		2D2EF7821B73BA13009D0F96 /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
+		2D2EF7841B73BD41009D0F96 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		2D2EF7861B73BE49009D0F96 /* SegControlTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegControlTableViewCell.swift; sourceTree = "<group>"; };
+		2D2EF7881B73E496009D0F96 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		2D2EF78A1B73E679009D0F96 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		2D2EF78C1B73E80C009D0F96 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
+		2D2EF78E1B73E89A009D0F96 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		2D2EF7951B75402A009D0F96 /* DoubleSegControlTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleSegControlTableViewCell.swift; sourceTree = "<group>"; };
+		2D2EF7971B78EDC5009D0F96 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		2D2EF7991B78FD7B009D0F96 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		2D2EF79D1B793FD1009D0F96 /* Looks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Looks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,12 +114,22 @@
 				2D2EF73B1B715BC3009D0F96 /* AppDelegate.swift */,
 				2D2EF75F1B715E19009D0F96 /* SelfieViewController.swift */,
 				2D2EF73D1B715BC3009D0F96 /* ClosetViewController.swift */,
+				2D2EF7971B78EDC5009D0F96 /* TabBarViewController.swift */,
 				2D2EF73F1B715BC3009D0F96 /* SecondViewController.swift */,
 				2D2EF7611B724DB3009D0F96 /* DetailViewController.swift */,
 				2D2EF7411B715BC3009D0F96 /* Main.storyboard */,
+				2D2EF7951B75402A009D0F96 /* DoubleSegControlTableViewCell.swift */,
+				2D2EF78E1B73E89A009D0F96 /* ButtonTableViewCell.swift */,
+				2D2EF78A1B73E679009D0F96 /* DatePickerTableViewCell.swift */,
+				2D2EF7861B73BE49009D0F96 /* SegControlTableViewCell.swift */,
+				2D2EF7881B73E496009D0F96 /* LabelTableViewCell.swift */,
+				2D2EF78C1B73E80C009D0F96 /* TextViewTableViewCell.swift */,
+				2D2EF7841B73BD41009D0F96 /* TextFieldTableViewCell.swift */,
+				2D2EF7821B73BA13009D0F96 /* PhotoTableViewCell.swift */,
 				2D2EF7631B724FF0009D0F96 /* CluelessCloset.xcdatamodeld */,
+				2D2EF7991B78FD7B009D0F96 /* Settings.swift */,
+				2D2EF79D1B793FD1009D0F96 /* Looks.swift */,
 				2D2EF77C1B72DCE9009D0F96 /* Closets.swift */,
-				2D2EF77E1B72DCF9009D0F96 /* Looks.swift */,
 				2D2EF7801B72DD0A009D0F96 /* LookDates.swift */,
 				2D2EF7441B715BC3009D0F96 /* Images.xcassets */,
 				2D2EF7461B715BC3009D0F96 /* LaunchScreen.xib */,
@@ -233,15 +263,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D2EF7831B73BA13009D0F96 /* PhotoTableViewCell.swift in Sources */,
 				2D2EF7601B715E19009D0F96 /* SelfieViewController.swift in Sources */,
 				2D2EF7811B72DD0A009D0F96 /* LookDates.swift in Sources */,
+				2D2EF78F1B73E89A009D0F96 /* ButtonTableViewCell.swift in Sources */,
+				2D2EF7981B78EDC5009D0F96 /* TabBarViewController.swift in Sources */,
+				2D2EF7871B73BE49009D0F96 /* SegControlTableViewCell.swift in Sources */,
 				2D2EF77D1B72DCE9009D0F96 /* Closets.swift in Sources */,
+				2D2EF78B1B73E679009D0F96 /* DatePickerTableViewCell.swift in Sources */,
+				2D2EF7961B75402A009D0F96 /* DoubleSegControlTableViewCell.swift in Sources */,
 				2D2EF7401B715BC3009D0F96 /* SecondViewController.swift in Sources */,
+				2D2EF7851B73BD41009D0F96 /* TextFieldTableViewCell.swift in Sources */,
+				2D2EF79E1B793FD1009D0F96 /* Looks.swift in Sources */,
 				2D2EF7621B724DB3009D0F96 /* DetailViewController.swift in Sources */,
 				2D2EF7651B724FF0009D0F96 /* CluelessCloset.xcdatamodeld in Sources */,
 				2D2EF73C1B715BC3009D0F96 /* AppDelegate.swift in Sources */,
-				2D2EF77F1B72DCF9009D0F96 /* Looks.swift in Sources */,
+				2D2EF7891B73E496009D0F96 /* LabelTableViewCell.swift in Sources */,
 				2D2EF73E1B715BC3009D0F96 /* ClosetViewController.swift in Sources */,
+				2D2EF78D1B73E80C009D0F96 /* TextViewTableViewCell.swift in Sources */,
+				2D2EF79A1B78FD7B009D0F96 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
