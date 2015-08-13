@@ -15,6 +15,8 @@ class PhotoTableViewCell: UITableViewCell {
     @IBOutlet var cameraButton              :UIButton!
     @IBOutlet var deleteButton              :UIButton!
     @IBOutlet var saveToCameraRollSwitch    :UISwitch!
+    @IBOutlet var saveToCameraRollLabel     :UILabel!
+    @IBOutlet var saveToCameraRollView      :UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

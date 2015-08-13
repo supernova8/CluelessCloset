@@ -10,30 +10,40 @@ import UIKit
 import CoreData
 
 
-class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let managedObjectContext:NSManagedObjectContext! = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
-    var selectedLook :Looks? //unwrapped so it can be nil
-    private var newLook  :Looks! //not wrapped
-    private var newLookDate  :LookDates! //not wrapped
-    var currentSettings :Settings!
+    var selectedLook        :Looks? //unwrapped so it can be nil
+    var newLook     :Looks! //not wrapped
+    private var newLookDate :LookDates! //not wrapped
+    var currentSettings     :Settings!
+    var currentCloset       :Closets!
+    var newLookImageNumber = 0
+    var timesWorn = ""
     
     var looksArray = [Looks]()
 
     var photoEntryFieldArray = ["Photo"]
     var photoFieldTypeArray = ["photoCell"]
     
-    var infoEntryFieldArray = ["Name:","Occasion:","Season:","Date Worn:"]
-    var infoFieldTypeArray = ["textFieldCell","textFieldCell","segControlCell","labelCell"]
+    var infoEntryFieldArray = ["Name:","Occasion:","Season:","Time Worn:","Date Worn:"]
+    var infoFieldTypeArray = ["textFieldCell","textFieldCell","segControlCell","labelCell","labelCell"]
     
     var detailEntryFieldArray = ["Top:","Bottom:","Dress:","Shoes:","Outerwear:","Accessories:","Tags:"]
     var detailFieldTypeArray = ["dblSegControlCell","dblSegControlCell","dblSegControlCell","dblSegControlCell","dblSegControlCell","dblSegControlCell","textViewCell"]
     
     var todayDate = NSDate()
     
+    var imagePicker = UIImagePickerController()
+    
+    var selfiePhoto :UIImage?
+    var haveSelfie: Bool! = false
+    var saveToCameraRoll: Bool! = false
+    
     @IBOutlet var selfieTableView :UITableView!
+    @IBOutlet var faveButton :UIBarButtonItem!
     
     //MARK: - Core Methods
     
@@ -69,48 +79,10 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         newLookDate2.relationshipLookDateLook = newLook
         
         
-//        //Record 2
-//        var newLook1 = Looks(entity: entityDescription, insertIntoManagedObjectContext: managedObjectContext)
-//        
-//        newLook1.lookName = "Read Email"
-//        newLook1.lookNumber = 2 as Int
-//        
-//        newLook1.lookSeason = 0 as Int
-//        newLook1.lookFave = false
-//        
-////        newLook1.dateEntered = NSDate()
-////        newLook1.dateUpdated = NSDate()
-////        newLook1.lookDateCompleted = NSDate()
-////        
-//        //Record 3
-//        var newLook2 = Looks(entity: entityDescription, insertIntoManagedObjectContext: managedObjectContext)
-//        
-//        newLook2.lookName = "Pay Bills"
-//        newLook2.lookNumber = 3 as Int
-//        
-//        newLook2.lookSeason = 0 as Int
-//        newLook2.lookFave = false
-//        
-////        newLook2.dateEntered = NSDate()
-////        newLook2.dateUpdated = NSDate()
-////        newLook2.lookDateCompleted = NSDate()
-////        
-//        //Record 4
-//        var newLook3 = Looks(entity: entityDescription, insertIntoManagedObjectContext: managedObjectContext)
-//        
-//        newLook3.lookName = "Cook Dinner"
-//        newLook3.lookNumber = 4 as Int
-//        
-//        newLook3.lookSeason = 0 as Int
-//        newLook3.lookFave = false
-//        
-////        newLook3.dateEntered = NSDate()
-////        newLook3.dateUpdated = NSDate()
-////        newLook3.lookDateCompleted = NSDate()
-////        
+
         
         appDelegate.saveContext()
-        
+        println("Temp Record Add")
         
         
     }
@@ -124,6 +96,39 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
     }
     
+    func fetchCloset() -> Closets {
+        println("Fetch Image and Look Numbers")
+        let fetchRequest :NSFetchRequest = NSFetchRequest(entityName: "Closets")
+        
+        //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lookNumber", ascending: true), NSSortDescriptor(key: "lookName", ascending:true)]
+        
+        var error :NSError?
+        let fetchresults = managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Closets]
+//        
+//        if let fetchresultsArray = fetchresults {
+//            let currentCloset = fetchresultsArray[0] as Closets
+//            println("Return CLoset Name and Description: \(currentCloset.closetName), \(currentCloset.closetDescription)")
+//            
+//            return currentCloset
+//        } else {
+        
+            println("Create New Closet, Name and Description")
+            
+            let entityDescription : NSEntityDescription! = NSEntityDescription.entityForName("Closets", inManagedObjectContext: managedObjectContext)
+            
+            var newCloset = Closets(entity: entityDescription, insertIntoManagedObjectContext: managedObjectContext)
+            
+            newCloset.closetName = "Default"
+            newCloset.closetDescription = "The First Closet!"
+            
+            appDelegate.saveContext()
+            println("New Closet Add")
+            return newCloset
+       // }
+    }
+
+    
+    
     func fetchSettings() -> Settings {
         println("Fetch Image and Look Numbers")
         let fetchRequest :NSFetchRequest = NSFetchRequest(entityName: "Settings")
@@ -133,32 +138,13 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         var error :NSError?
         let fetchresults = managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Settings]
         
-//        if fetchresults == nil {
-//            println("Create New Image and Look Numbers")
-//            
-//            let entityDescription : NSEntityDescription! = NSEntityDescription.entityForName("Settings", inManagedObjectContext: managedObjectContext)
-//            
-//            var newSetting = Settings(entity: entityDescription, insertIntoManagedObjectContext: managedObjectContext)
-//            
-//            newSetting.imageNameCounter = 1 as Int
-//            newSetting.lookNumberCounter = 1 as Int
-//            
-//            appDelegate.saveContext()
-//            
-//            return newSetting
-//        } else {
-//            let currentSets = fetchresults![0] as Settings
+//        if let fetchresultsArray = fetchresults {
+//            let currentSets = fetchresultsArray[0] as Settings
 //            println("Return Image and Look Numbers: \(currentSets.imageNameCounter),  \(currentSets.lookNumberCounter)")
 //            
 //            return currentSets
-//        }
-        if let fetchresultsArray = fetchresults {
-            let currentSets = fetchresultsArray[0] as Settings
-            println("Return Image and Look Numbers: \(currentSets.imageNameCounter),  \(currentSets.lookNumberCounter)")
-            
-            return currentSets
-        } else {
-            
+//        } else {
+        
             println("Create New Image and Look Numbers")
             
             let entityDescription : NSEntityDescription! = NSEntityDescription.entityForName("Settings", inManagedObjectContext: managedObjectContext)
@@ -169,19 +155,12 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             newSetting.lookNumberCounter = 1 as Int
             
             appDelegate.saveContext()
-            
+            println("New Setting Add")
             return newSetting
-        }
+       // }
     }
     
-//    func fetchLookNumber(SearchText: String) -> [Looks] {
-//        println("Fetch")
-//        let fetchRequest :NSFetchRequest = NSFetchRequest(entityName: "Looks")
-//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lookNumber", ascending: true), NSSortDescriptor(key: "lookName", ascending:true)]
-//        
-//        return managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as! [Looks]
-//        
-//    }
+
     
    
     //MARK: - TableView Methods
@@ -189,7 +168,12 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     //Sections
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        
+        if newLook == nil {
+            
+            return 1
+        }
+            return 3
         
     }// this lets it know its sections
     
@@ -226,31 +210,6 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         return "Unknown"
     }
     
-//    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-//        if section == 0 {
-//            return "\(metroStationsArray.count) Stations"
-//        }
-//        if section == 1 {
-//            return "\(bikeStationsArray.count) Stations"
-//        }
-//        return "Unknown"
-//    }
-    
-//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        
-//        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
-//        
-//        if indexPath.section == 0 {
-//            cell.textLabel!.text = metroStationsArray[indexPath.row]
-//            
-//        } else if indexPath.section == 1 {
-//            cell.textLabel!.text = bikeStationsArray[indexPath.row]
-//        }
-//        
-//        return cell
-//        
-//    }
-
     
 
     
@@ -261,87 +220,34 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         if indexPath.section == 0 {
             
             var photoCell = tableView.dequeueReusableCellWithIdentifier("photoCell") as! PhotoTableViewCell
-            //photoCell.lookImageView.image = UIImage(named:"iTunesArtwork")
-            //photoCell.cameraButton.
+            if let lookPhoto = selfiePhoto {
+            photoCell.lookImageView.image = selfiePhoto
+                //photoCell.lookImageView.image = UIImage(named: getDocumentPathForFile(newLook.lookImageName))
+                //println("we have a photo! number: \(currentSettings.imageNameCounter)")
+            }
+            //photoCell.galleryButton.addTarget(self, action: galleryButtonTapped:", forControlEvents: UIControlEvents.EditingChanged)
             //photoCell.cellLabel.text = infoEntryFieldArray[indexPath.row]
-            //photoCell.cellTextField.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.EditingChanged)
+            photoCell.saveToCameraRollSwitch.addTarget(self, action: "saveToCameraRollSwitchChanged:", forControlEvents: UIControlEvents.ValueChanged)
             photoCell.selectionStyle = UITableViewCellSelectionStyle.None
+            
+            if (haveSelfie == false) {
+                println("Have Selfie? \(haveSelfie)")
+                photoCell.saveToCameraRollSwitch.userInteractionEnabled = false
+                photoCell.saveToCameraRollLabel.textColor = UIColor.lightGrayColor()
+                photoCell.saveToCameraRollView.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
+                //segControlCell.cellSegControl.enabled = false
+            } else {
+                println("Have Selfie? \(haveSelfie)")
+                photoCell.saveToCameraRollSwitch.userInteractionEnabled = true
+                photoCell.saveToCameraRollLabel.textColor = UIColor(red: 127/255, green: 188/255, blue: 163/255, alpha: 1)
+                photoCell.saveToCameraRollView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+
+                //segControlCell.cellSegControl.enabled = true
+            }
+ 
             return photoCell
-            
-            
-//            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier:"cell")
-//            let currentLook = looksArray[indexPath.row]
-//            cell.textLabel!.text = currentLook.lookName
-//            
-//            var totalDates = 0
-//            let dateWornSet = currentLook.relationshipLookLookDates
-//            
-//            for dateWorn in dateWornSet {
-//                totalDates++
-//            }
-//
-//            cell.detailTextLabel!.text = "\(totalDates)"
-        
+
         } else if indexPath.section == 1 {
-    
-//            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier:"cell")
-//            let currentLook = looksArray[indexPath.row]
-//            cell.textLabel!.text = currentLook.lookName
-//            
-//            var totalDates = 0
-//            let dateWornSet = currentLook.relationshipLookLookDates
-//            
-//            for dateWorn in dateWornSet {
-//            totalDates++
-//            }
-        
-//            switch indexPath.row {
-//            case 0,1:
-//                var textFieldCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell") as! TextFieldTableViewCell
-//                textFieldCell.cellLabel.text = infoEntryFieldArray[indexPath.row]
-//                textFieldCell.cellTextField.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.EditingChanged)
-//                return textFieldCell
-//            case 2:
-//                var segControlCell = tableView.dequeueReusableCellWithIdentifier("segControlCell") as! SegControlTableViewCell
-//                segControlCell.cellLabel.text = infoEntryFieldArray[indexPath.row]
-//                //seg control
-//                
-//                //segControlCell.cellSegControl = UISegmentedControl (items: ["First","Second","Third"])
-//                //segControlCell.cellSegControl.frame = CGRectMake(60, 250,200, 30)
-//                segControlCell.cellSegControl.removeAllSegments()
-//                let tempArray = ["Fall","Winter","Spring", "Summer" ]
-//                for season in tempArray {
-//                    segControlCell.cellSegControl.insertSegmentWithTitle(season, atIndex: 0, animated: false)
-//                }
-//                segControlCell.cellSegControl.selectedSegmentIndex = 0
-//                //segmentedControl.addTarget(self, action: "segmentedControlAction:", forControlEvents: .ValueChanged)
-//                //self.view.addSubview(segControlCell.cellSegControl)
-//                
-//                
-//                segControlCell.cellSegControl.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.ValueChanged)
-//                return segControlCell
-//            case 3:
-//                var labelCell = tableView.dequeueReusableCellWithIdentifier("labelCell") as! LabelTableViewCell
-//                labelCell.cellLabel.text = infoEntryFieldArray[indexPath.row]
-//                
-//                var formatter = NSDateFormatter()
-//                formatter.dateFormat = "EEEE, MMMM d, yyyy"
-//                
-//                labelCell.cellDateLabel.text = "\(formatter.stringFromDate(todayDate))"
-//                
-//               // labelCell.cellLabel.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.ValueChanged)
-//                return labelCell
-//            case 4:
-//                var datePickerCell = tableView.dequeueReusableCellWithIdentifier("datePickerCell") as! DatePickerTableViewCell
-//                //datePickerCell.cellLabel.text = infoEntryFieldArray[indexPath.row]
-//                datePickerCell.cellDatePickerView.date = NSDate()
-//                //datePickerCell.cellDatePickerView.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.ValueChanged)
-//                return datePickerCell
-//            default:
-//                var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
-//                return cell
-//                }
-            
             switch infoFieldTypeArray[indexPath.row] {
             case "textFieldCell":
                 var textFieldCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell") as! TextFieldTableViewCell
@@ -356,17 +262,58 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 
                 textFieldCell.cellTextField.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.EditingChanged)
                 textFieldCell.selectionStyle = UITableViewCellSelectionStyle.None
+                
+                if (haveSelfie == false) {
+                    println("Have Selfie? \(haveSelfie)")
+                textFieldCell.userInteractionEnabled = false
+                textFieldCell.cellTextField.textColor = UIColor.lightGrayColor()
+                textFieldCell.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
+                textFieldCell.cellLabel.textColor = UIColor.lightGrayColor()
+                } else {
+                    println("Have Selfie? \(haveSelfie)")
+                    textFieldCell.userInteractionEnabled = true
+                    textFieldCell.cellTextField.textColor = UIColor.blackColor()
+                    textFieldCell.backgroundColor = UIColor.whiteColor()
+                    textFieldCell.cellLabel.textColor = UIColor.blackColor()
+                }
                 return textFieldCell
             case "labelCell":
                 var labelCell = tableView.dequeueReusableCellWithIdentifier("labelCell") as! LabelTableViewCell
                 labelCell.cellLabel.text = infoEntryFieldArray[indexPath.row]
 
+                
+                if labelCell.cellLabel.text == "Date Worn:" {
+                    
                 var formatter = NSDateFormatter()
                 formatter.dateFormat = "EEEE, MMMM d, yyyy"
 
                 labelCell.cellDateLabel.text = "\(formatter.stringFromDate(newLookDate.dateWorn))"
+                    
+                } else if labelCell.cellLabel.text == "Time Worn:" {
+                    
+                    labelCell.cellDateLabel.text = timesWorn
+                    
+                }
+                
                 labelCell.selectionStyle = UITableViewCellSelectionStyle.None
                // labelCell.cellLabel.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                
+                if (haveSelfie == false) {
+                    println("Have Selfie? \(haveSelfie)")
+                    labelCell.userInteractionEnabled = false
+                    labelCell.cellLabel.textColor = UIColor.lightGrayColor()
+                    labelCell.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
+                    labelCell.cellDateLabel.textColor = UIColor.lightGrayColor()
+                } else {
+                    println("Have Selfie? \(haveSelfie)")
+                    labelCell.userInteractionEnabled = true
+                    labelCell.cellLabel.textColor = UIColor.blackColor()
+                    labelCell.backgroundColor = UIColor.whiteColor()
+                    labelCell.cellDateLabel.textColor = UIColor.blackColor()
+                }
+                
+                
+                
                 return labelCell
            case "segControlCell":
                 
@@ -404,6 +351,22 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 
                 segControlCell.cellSegControl.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.ValueChanged)
                 segControlCell.selectionStyle = UITableViewCellSelectionStyle.None
+                
+                if (haveSelfie == false) {
+                    println("Have Selfie? \(haveSelfie)")
+                    segControlCell.userInteractionEnabled = false
+                    segControlCell.cellLabel.textColor = UIColor.lightGrayColor()
+                    segControlCell.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
+                    segControlCell.cellSegControl.enabled = false
+                } else {
+                    println("Have Selfie? \(haveSelfie)")
+                    segControlCell.userInteractionEnabled = true
+                    segControlCell.cellLabel.textColor = UIColor.blackColor()
+                    segControlCell.backgroundColor = UIColor.whiteColor()
+                    segControlCell.cellSegControl.enabled = true
+                }
+                
+                
                 return segControlCell
             case "datePickerCell":
                 var datePickerCell = tableView.dequeueReusableCellWithIdentifier("datePickerCell") as! DatePickerTableViewCell
@@ -421,39 +384,6 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             
             
         } else if indexPath.section == 2 {
-            
-//            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier:"cell")
-//            let currentLook = looksArray[indexPath.row]
-//            cell.textLabel!.text = currentLook.lookName
-//            
-//            var totalDates = 0
-//            let dateWornSet = currentLook.relationshipLookLookDates
-//            
-//                for dateWorn in dateWornSet {
-//                totalDates++
-//                }
-//            switch indexPath.row {
-//            case 0,1,2,3,4,5,6,7,8,9,10,11:
-//                var segControlCell = tableView.dequeueReusableCellWithIdentifier("segControlCell") as! SegControlTableViewCell
-//                segControlCell.cellLabel.text = detailEntryFieldArray[indexPath.row]
-//                //seg control
-//                segControlCell.cellSegControl.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.ValueChanged)
-//                return segControlCell
-//            case 12:
-//                var textViewCell = tableView.dequeueReusableCellWithIdentifier("textViewCell") as! TextViewTableViewCell
-//                textViewCell.cellLabel.text = detailEntryFieldArray[indexPath.row]
-//                //textViewCell.cellTextView.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.ValueChanged)
-//                return textViewCell
-//            case 13:
-//                var buttonCell = tableView.dequeueReusableCellWithIdentifier("buttonCell") as! ButtonTableViewCell
-//                //buttonCell.cellLabel.text = detailEntryFieldArray[indexPath.row]
-//                buttonCell.saveButton.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.ValueChanged)
-//                return buttonCell
-//            default:
-//                var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
-//                return cell
-//            }
-
             switch detailFieldTypeArray[indexPath.row] {
             case "textViewCell":
                 var textViewCell = tableView.dequeueReusableCellWithIdentifier("textViewCell") as! TextViewTableViewCell
@@ -461,6 +391,23 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 textViewCell.cellTextView.text = newLook.lookTags
                 
                 textViewCell.selectionStyle = UITableViewCellSelectionStyle.None
+                
+                if (haveSelfie == false) {
+                    println("Have Selfie? \(haveSelfie)")
+                    textViewCell.userInteractionEnabled = false
+                    textViewCell.cellLabel.textColor = UIColor.lightGrayColor()
+                    textViewCell.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
+                    textViewCell.cellTextView.textColor = UIColor.lightGrayColor()
+                } else {
+                    println("Have Selfie? \(haveSelfie)")
+                    textViewCell.userInteractionEnabled = true
+                    textViewCell.cellLabel.textColor = UIColor.blackColor()
+                    textViewCell.backgroundColor = UIColor.whiteColor()
+                    textViewCell.cellTextView.textColor = UIColor.blackColor()
+                }
+
+                
+                
                 return textViewCell
             case "buttonCell":
                 var buttonCell = tableView.dequeueReusableCellWithIdentifier("buttonCell") as! ButtonTableViewCell
@@ -470,26 +417,6 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 return buttonCell
 
             case "dblSegControlCell":
-                
-//                var segControlCell = tableView.dequeueReusableCellWithIdentifier("segControlCell") as! SegControlTableViewCell
-//                segControlCell.cellLabel.text = infoEntryFieldArray[indexPath.row]
-//                //seg control
-//                
-//                //segControlCell.cellSegControl = UISegmentedControl (items: ["First","Second","Third"])
-//                //segControlCell.cellSegControl.frame = CGRectMake(60, 250,200, 30)
-//                segControlCell.cellSegControl.removeAllSegments()
-//                let tempArray = ["Fall","Winter","Spring", "Summer" ]
-//                for season in tempArray {
-//                    segControlCell.cellSegControl.insertSegmentWithTitle(season, atIndex: 0, animated: false)
-//                }
-//                segControlCell.cellSegControl.selectedSegmentIndex = 0
-//                //segmentedControl.addTarget(self, action: "segmentedControlAction:", forControlEvents: .ValueChanged)
-//                //self.view.addSubview(segControlCell.cellSegControl)
-//                
-//                
-//                segControlCell.cellSegControl.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.ValueChanged)
-//                return segControlCell
-                
                 var dblSegControlCell = tableView.dequeueReusableCellWithIdentifier("dblSegControlCell") as! DoubleSegControlTableViewCell
                 dblSegControlCell.cellLabel.text = detailEntryFieldArray[indexPath.row]
                 //seg control
@@ -727,6 +654,25 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 dblSegControlCell.cellSegControl.addTarget(self, action: "segControlChanged:", forControlEvents: UIControlEvents.ValueChanged)
                 dblSegControlCell.cellSegControl2.addTarget(self, action: "segControl2Changed:", forControlEvents: UIControlEvents.ValueChanged)
                 dblSegControlCell.selectionStyle = UITableViewCellSelectionStyle.None
+                
+                if (haveSelfie == false) {
+                    println("Have Selfie? \(haveSelfie)")
+                    dblSegControlCell.userInteractionEnabled = false
+                    dblSegControlCell.cellLabel.textColor = UIColor.lightGrayColor()
+                    dblSegControlCell.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
+                    dblSegControlCell.cellSegControl.enabled = false
+                    dblSegControlCell.cellSegControl2.enabled = false
+                } else {
+                    println("Have Selfie? \(haveSelfie)")
+                    dblSegControlCell.userInteractionEnabled = true
+                    dblSegControlCell.cellLabel.textColor = UIColor.blackColor()
+                    dblSegControlCell.backgroundColor = UIColor.whiteColor()
+                    dblSegControlCell.cellSegControl.enabled = true
+                    dblSegControlCell.cellSegControl2.enabled = true
+                }
+                
+                
+                
                 return dblSegControlCell
                 
             case "datePickerCell":
@@ -812,6 +758,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         return 44.0
     }
+
     
     //MARK: - Interactivity Methods
     
@@ -855,7 +802,8 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         }
         
-        //appDelegate.saveContext()
+        appDelegate.saveContext()
+        println("Info Section (tf and Season) Add")
     }
 
     func segControlChanged(sender: AnyObject) {
@@ -886,6 +834,8 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 println("top2: \(sCell.cellSegControl2.selectedSegmentIndex)")
 
         }
+        appDelegate.saveContext()
+        println("Pieces top row Add")
     }
     func segControl2Changed(sender: AnyObject) {
         let textFieldPosition = sender.convertPoint(CGPointZero, toView: selfieTableView)
@@ -916,8 +866,18 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 println("top2: \(sCell.cellSegControl2.selectedSegmentIndex)")
    
         }
+        appDelegate.saveContext()
+        println("Pices Bottom Row Add")
     }
 
+    func saveToCameraRollSwitchChanged(camSwitch: UISwitch) {
+       
+        saveToCameraRoll = camSwitch.on
+        
+        saveImage()
+        
+        println("Save To Camera Roll?: \(saveToCameraRoll)")
+    }
     
     func textViewDidChange(textView: UITextView) {
 //        if cell is TextViewTableViewCell {
@@ -928,13 +888,240 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
 //        }
         newLook.lookTags = textView.text
         println("Tags: \(textView.text)")
+        appDelegate.saveContext()
+        println("Tags Add")
     }
     
     func datePickerChanged(datepicker: UIDatePicker) {
         
         newLookDate.dateWorn = datepicker.date
         println("Date Worn: \(newLookDate.dateWorn)")
+        appDelegate.saveContext()
+        println("Date Picker Add")
     }
+    
+    @IBAction func faveButtonPressed(sender: UIBarButtonItem) {
+        
+        if faveButton.tag == 0 {
+            newLook.lookFave = true
+            faveButton.image = UIImage(named: "heart-full")
+            faveButton.tag = 1
+            
+            println("Now a Fave")
+            
+        }
+        else if (faveButton.tag == 1) {
+            
+            newLook.lookFave = false
+            faveButton.image = UIImage(named: "heart-empty")
+            faveButton.tag = 0
+            
+            println("Not a Fave")
+            
+        } else {
+            println("Confused about faves")
+            
+        }
+        appDelegate.saveContext()
+        println("Fave Button Add")
+    }
+
+    //MARK: - Camera and Image Methods
+    
+    @IBAction func cameraButtonTapped(sender: AnyObject) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+                
+                //let imagePicker = UIImagePickerController()
+                
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+                //imagePicker.mediaTypes = [kUTTypeImage as NSString]
+                imagePicker.allowsEditing = false
+                
+                self.presentViewController(imagePicker, animated: true, 
+                    completion: nil)
+                //newMedia = true
+        } else {
+            let alertController = UIAlertController(title: "No Cameraa!", message:
+                "Looks like you don't have a camera! :P", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            println("No Camera");
+        }
+
+
+    }
+    
+    @IBAction func galleryButtonTapped(sender: AnyObject) {
+    
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
+                println("Button capture")
+                
+                
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.allowsEditing = false
+                
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+    }
+    
+    func createNewLook() {
+        
+        // it's Nil, an add so create it
+        
+        println("NEW LOOK")
+        
+        let entityDescription : NSEntityDescription! = NSEntityDescription.entityForName("Looks", inManagedObjectContext: managedObjectContext)
+        let entityDescription2 : NSEntityDescription! = NSEntityDescription.entityForName("LookDates", inManagedObjectContext: managedObjectContext)
+        
+        
+        
+        newLook = Looks(entity: entityDescription, insertIntoManagedObjectContext: managedObjectContext)
+        newLookDate = LookDates(entity: entityDescription2, insertIntoManagedObjectContext: managedObjectContext)
+        
+        currentCloset = fetchCloset()
+        currentSettings = fetchSettings()
+        
+        newLook.lookNumber = currentSettings.lookNumberCounter
+        currentSettings.lookNumberCounter = currentSettings.lookNumberCounter.integerValue + 1
+        
+        newLookImageNumber = currentSettings.imageNameCounter.integerValue
+        newLook.lookImageName = "image\(newLookImageNumber).png"
+        //do i need to do the above here?
+        
+        currentSettings.imageNameCounter = currentSettings.imageNameCounter.integerValue + 1
+        
+        newLook.lookName = ""
+        newLook.lookSeason = ""
+        
+        newLook.lookAccessoryType = ""
+        newLook.lookBottomType = ""
+        newLook.lookDressType = ""
+        newLook.lookOuterwearType = ""
+        newLook.lookShoeType = ""
+        newLook.lookTopType = ""
+        newLook.lookTags = ""
+        
+        newLook.lookArchive = false
+        newLook.lookFave = false
+        
+        //newLook.lookImageName = nil;
+        
+        newLook.dateAdded = NSDate()
+        newLook.dateUpdated = NSDate()
+        
+        newLook.relationshipLookCloset = currentCloset
+        
+        newLookDate.dateWorn = NSDate()
+        newLookDate.dateUpdated = NSDate()
+        newLookDate.dateAdded = NSDate()
+        newLookDate.dateOccasion = ""
+        
+        newLookDate.relationshipLookDateLook = newLook
+        
+        timesWorn = "0"
+        
+        //disable fave icon
+        
+        faveButton.enabled = true
+        
+        
+        
+        println(newLook)
+        
+        navigationItem.title = "Look No. \(newLook.lookNumber)"
+        
+    }
+    
+        func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+            if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                //selfiePhoto.contentMode = .ScaleAspectFit
+                println("Picked An image")
+                selfiePhoto = pickedImage
+                haveSelfie = true
+                
+                if newLook == nil {
+                    println("New Look is Nil, Create New Look")
+                    createNewLook()
+                }
+                
+                saveImage()
+                selfieTableView.reloadData()
+                self.faveButton.enabled = true
+                
+
+            }
+            
+            dismissViewControllerAnimated(true, completion: nil)
+            
+        }
+        
+        func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+            self.imagePicker = UIImagePickerController()
+            dismissViewControllerAnimated(true, completion: nil)
+        }
+    
+    func getDocumentPathForFile(filename: String) -> String {
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        //NSTemporaryDirectory() // temp directory
+        return  documentsPath.stringByAppendingPathComponent(filename)
+        
+        
+    }
+    
+    func saveImage() {
+        
+        println("Save Image!")
+        var fileManager = NSFileManager.defaultManager()
+        var error:NSErrorPointer = NSErrorPointer()
+        
+        var imageFileName = "image\(newLookImageNumber).png"
+        
+        var newImagePath = getDocumentPathForFile(imageFileName)
+        
+        println("Document Path and Name: \(newImagePath)")
+        
+        if ((selfiePhoto) != nil) {
+            
+            if (fileManager.fileExistsAtPath(newImagePath)) {
+                println("removed file: \(newImagePath)")
+               fileManager.removeItemAtPath(newImagePath, error: error)
+                if error != nil {
+                    println(error.debugDescription)
+                }
+                
+            }
+            //scaleImage
+            UIImagePNGRepresentation(selfiePhoto).writeToFile(newImagePath, atomically: true)
+            newLook.lookImageName = imageFileName
+            //currentSettings.imageNameCounter = currentSettings.imageNameCounter.integerValue + 1
+            
+            if (saveToCameraRoll == true) {
+                
+                UIImageWriteToSavedPhotosAlbum(selfiePhoto, nil, nil, nil)
+                println("Saved to Camera Roll")
+                
+            }
+            appDelegate.saveContext()
+            println("Save Image Add")
+        }
+        
+    }
+    func fileIsLocal(filename: String) -> Bool {
+        var fileManager = NSFileManager.defaultManager()
+        
+        return fileManager.fileExistsAtPath(getDocumentPathForFile(filename))
+        
+        
+    }
+    
+    
     
     //MARK: - Life Cycle Methods
 
@@ -944,78 +1131,116 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
          selfieTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         
-        
-        
-        
-        
-
-    }
+           }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        
         if let unwrappedLook = selectedLook {
+            
             //from tapped row
             println("From Somewhere")
             newLook = unwrappedLook
             
+            let dateWornSet = newLook.relationshipLookLookDates
+            var sortDescriptor = NSSortDescriptor(key: "dateWorn", ascending: false)
+            var dateWornSortedArray = dateWornSet.sortedArrayUsingDescriptors([sortDescriptor])
+            
+            newLookDate = dateWornSortedArray.first as! LookDates
+            
+            var formatter = NSDateFormatter()
+            formatter.dateFormat = "EEEE, MMMM d, yyyy"
+            
+            //lastWornDateLabel.text = "\(formatter.stringFromDate(lastLookDate.dateWorn))"
+            timesWorn = "\(dateWornSet.count)"
             
             
+            // FIGURE OUT THE DATE STUFF LATER - CALENDAT VS. CLOSET, ETC.
+            
+            //            let entityDescription2 : NSEntityDescription! = NSEntityDescription.entityForName("LookDates", inManagedObjectContext: managedObjectContext)
+            //
+            //            newLookDate = LookDates(entity: entityDescription2, insertIntoManagedObjectContext: managedObjectContext)
+            //
+            //            newLookDate.dateWorn = NSDate()
+            //            newLookDate.dateUpdated = NSDate()
+            //            newLookDate.dateAdded = NSDate()
+            //            newLookDate.dateOccasion = ""
+            //
+            //            newLookDate.relationshipLookDateLook = newLook
+            
+            
+            
+            //Set the Image
+            if self.fileIsLocal(newLook.lookImageName) {
+                println("Found \(newLook.lookImageName)")
+                selfiePhoto = UIImage(named: getDocumentPathForFile(newLook.lookImageName))
+                println("\(getDocumentPathForFile(newLook.lookImageName))")
+                println(selfiePhoto?.description)
+                haveSelfie = true
+                
+            } else {
+                println("Not Found \(newLook.lookImageName)")
+                
+            }
+            
+            //favebutton
+            faveButton.enabled = true
+            
+            if newLook.lookFave == true {
+                
+                faveButton.image = UIImage(named: "heart-full")
+                faveButton.tag = 1
+                
+                println("Now a Fave")
+                
+            }
+//            else if newLook.lookFave == fa {
+//                
+//                newLook.lookFave = false
+//                faveButton.image = UIImage(named: "heart-empty")
+//                faveButton.tag = 0
+//                
+//                println("Not a Fave")
+//                
+//            }
+            
+            self.title = "Look No. \(newLook.lookNumber)"
             
         } else {
-            // it's Nil, an add so create it
-            
-            let entityDescription : NSEntityDescription! = NSEntityDescription.entityForName("Looks", inManagedObjectContext: managedObjectContext)
-            let entityDescription2 : NSEntityDescription! = NSEntityDescription.entityForName("LookDates", inManagedObjectContext: managedObjectContext)
-            
-            
-            newLook = Looks(entity: entityDescription, insertIntoManagedObjectContext: managedObjectContext)
-            newLookDate = LookDates(entity: entityDescription2, insertIntoManagedObjectContext: managedObjectContext)
-            
-            
-            //Record 1
-            newLook.lookName = "Casual Chic"
-            
-            currentSettings = fetchSettings()
-            
-            newLook.lookNumber = currentSettings.lookNumberCounter
-            currentSettings.lookNumberCounter = currentSettings.lookNumberCounter.integerValue + 1
-            
-            newLook.lookSeason = "Summer"
-            
-            newLook.lookAccessoryType = ""
-            newLook.lookBottomType = ""
-            newLook.lookDressType = ""
-            newLook.lookOuterwearType = ""
-            newLook.lookShoeType = ""
-            newLook.lookTopType = "Other"
-            newLook.lookTags = ""
-            
-            newLook.lookArchive = false
-            newLook.lookFave = false
-            
-            //newLook.lookImageName = nil;
-            
-            newLook.dateAdded = NSDate()
-            newLook.dateUpdated = NSDate()
-            
-            newLookDate.dateWorn = NSDate()
-            newLookDate.dateUpdated = NSDate()
-            newLookDate.dateAdded = NSDate()
-            newLookDate.dateOccasion = "Out with the girls"
-            
-            newLookDate.relationshipLookDateLook = newLook
-            
-            println(newLook)
-            
-            
-        }
 
-        
+            if newLook == nil {
+                println("New Look is Nil, Disable FAve Button")
+                  faveButton.enabled = false
+                selfiePhoto = nil
+//                self.title = "New Look"
+            }
+          
+        }
         
         //looksArray = fetchLooks("")
         selfieTableView.reloadData()
         
+
+      
+        
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if managedObjectContext.hasChanges {
+            
+            
+            
+            managedObjectContext.rollback()
+            
+        }
+        println("VWD")
+        
+//        newLook = nil
+//        newLookDate = nil
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

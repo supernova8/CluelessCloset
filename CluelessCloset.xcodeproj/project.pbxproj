@@ -30,6 +30,7 @@
 		2D2EF7981B78EDC5009D0F96 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7971B78EDC5009D0F96 /* TabBarViewController.swift */; };
 		2D2EF79A1B78FD7B009D0F96 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7991B78FD7B009D0F96 /* Settings.swift */; };
 		2D2EF79E1B793FD1009D0F96 /* Looks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF79D1B793FD1009D0F96 /* Looks.swift */; };
+		2D2EF7A01B7C13D8009D0F96 /* ClosetLookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF79F1B7C13D8009D0F96 /* ClosetLookTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		2D2EF7971B78EDC5009D0F96 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		2D2EF7991B78FD7B009D0F96 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		2D2EF79D1B793FD1009D0F96 /* Looks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Looks.swift; sourceTree = "<group>"; };
+		2D2EF79F1B7C13D8009D0F96 /* ClosetLookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosetLookTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				2D2EF73F1B715BC3009D0F96 /* SecondViewController.swift */,
 				2D2EF7611B724DB3009D0F96 /* DetailViewController.swift */,
 				2D2EF7411B715BC3009D0F96 /* Main.storyboard */,
+				2D2EF79F1B7C13D8009D0F96 /* ClosetLookTableViewCell.swift */,
 				2D2EF7951B75402A009D0F96 /* DoubleSegControlTableViewCell.swift */,
 				2D2EF78E1B73E89A009D0F96 /* ButtonTableViewCell.swift */,
 				2D2EF78A1B73E679009D0F96 /* DatePickerTableViewCell.swift */,
@@ -212,6 +215,7 @@
 				TargetAttributes = {
 					2D2EF7351B715BC3009D0F96 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = XYMZ3MTWGH;
 					};
 					2D2EF74C1B715BC3009D0F96 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -265,6 +269,7 @@
 			files = (
 				2D2EF7831B73BA13009D0F96 /* PhotoTableViewCell.swift in Sources */,
 				2D2EF7601B715E19009D0F96 /* SelfieViewController.swift in Sources */,
+				2D2EF7A01B7C13D8009D0F96 /* ClosetLookTableViewCell.swift in Sources */,
 				2D2EF7811B72DD0A009D0F96 /* LookDates.swift in Sources */,
 				2D2EF78F1B73E89A009D0F96 /* ButtonTableViewCell.swift in Sources */,
 				2D2EF7981B78EDC5009D0F96 /* TabBarViewController.swift in Sources */,
@@ -408,9 +413,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CluelessCloset/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -418,9 +426,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CluelessCloset/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

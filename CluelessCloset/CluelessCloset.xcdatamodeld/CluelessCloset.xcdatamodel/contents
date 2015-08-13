@@ -31,7 +31,7 @@
         <attribute name="lookTags" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lookTopType" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="relationshipLookCloset" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Closets" inverseName="relationshipClosetLooks" inverseEntity="Closets" syncable="YES"/>
-        <relationship name="relationshipLookLookDates" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="LookDates" inverseName="relationshipLookDateLook" inverseEntity="LookDates" syncable="YES"/>
+        <relationship name="relationshipLookLookDates" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LookDates" inverseName="relationshipLookDateLook" inverseEntity="LookDates" syncable="YES"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES">
         <attribute name="imageNameCounter" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -41,6 +41,6 @@
         <element name="Closets" positionX="234" positionY="35" width="128" height="118"/>
         <element name="Looks" positionX="-36" positionY="45" width="128" height="298"/>
         <element name="LookDates" positionX="178" positionY="288" width="128" height="118"/>
-        <element name="Settings" positionX="135" positionY="243" width="128" height="73"/>
+        <element name="Settings" positionX="-63" positionY="404" width="128" height="73"/>
     </elements>
 </model>

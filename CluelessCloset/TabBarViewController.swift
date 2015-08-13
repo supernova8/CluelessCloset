@@ -9,15 +9,30 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.selectedIndex = 2;
+        //self.selectedIndex = 2;
         
         // Do any additional setup after loading the view.
     }
-
+    
+    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem!) {
+        if item.tag == 2 && self.selectedIndex != 2 {
+            println("\(item.title)")
+            if let vControllers = self.viewControllers {
+                let navVC = vControllers[2] as! UINavigationController
+                let selfieVC = navVC.viewControllers![0] as! SelfieViewController
+                selfieVC.newLook = nil
+            }
+            
+            //[2] as! SelfieViewController
+//            selectedVC.newLook = nil
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

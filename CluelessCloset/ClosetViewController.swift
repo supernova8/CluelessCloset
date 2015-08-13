@@ -15,6 +15,7 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let managedObjectContext:NSManagedObjectContext! = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var looksArray = [Looks]()
+    var deleteLookIndexPath: NSIndexPath? = nil
     
     @IBOutlet var lookSearchBar :UISearchBar!
     @IBOutlet var looksTableView :UITableView!
@@ -102,49 +103,153 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func searchBarSearchButtonClicked(sender: UISearchBar) {
         
         sender.resignFirstResponder()
-        var searchStringPlus = lookSearchBar.text
+        //var searchStringPlus = lookSearchBar.text
         
         
         //searchStringPlus = searchStringPlus.stringByReplacingOccurrencesOfString(" ", withString: "+")
         
-        println("Search For This: \(searchStringPlus)")
+        println("Search For This: \(lookSearchBar.text)")
         
-        looksArray = fetchLooks(searchStringPlus)
+        looksArray = searchLooks()
+        
+        looksTableView.reloadData()
+        
     }
     
-    func fetchLooks(SearchText: String) -> [Looks] {
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+         println("ended editing search")
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        println("text Did Change in Search Bar: \(searchText)")
+    
+        if count(searchText) == 0 {
+            println("canceled button")
+            
+            self.searchBarCancelButtonClicked(searchBar)
+            
+            //searchBar.resignFirstResponder()
+            
+//            looksArray = searchLooks()
+//            
+//            looksTableView.reloadData()
+//            
+//            searchBar.resignFirstResponder()
+
+        }
+    
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        // Clear any search criteria
+        searchBar.text = ""
+        
+        // Dismiss the keyboard
+        searchBar.resignFirstResponder()
+        
+        // Force reload of table data
+
+        
+        println("canceled search")
+        
+        looksArray = searchLooks()
+        
+        looksTableView.reloadData()
+    }
+    
+    func searchLooks() -> [Looks] {
         println("Fetch")
+        
+        var searchString = lookSearchBar.text
+        
         let fetchRequest :NSFetchRequest = NSFetchRequest(entityName: "Looks")
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lookNumber", ascending: true), NSSortDescriptor(key: "lookName", ascending:true)]
         
+        if count(searchString) > 0 {
+
+        let predicate = NSPredicate(format: "lookTags contains[cd] %@ or lookName contains[cd] %@ or lookAccessoryType contains[cd] %@ or lookBottomType contains[cd] %@ or lookDressType contains[cd] %@ or lookNumber contains[cd] %@ or lookOuterwearType contains[cd] %@ or lookSeason contains[cd] %@ or lookShoeType contains[cd] %@ or lookTopType contains[cd] %@", searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString)
+        
+        fetchRequest.predicate = predicate
+        }
+        //var predicate = NSPredicate.
+        
         return managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as! [Looks]
+        
+    }
+    
+    func getDocumentPathForFile(filename: String) -> String {
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        //NSTemporaryDirectory() // temp directory
+        return  documentsPath.stringByAppendingPathComponent(filename)
+        
         
     }
     
     //MARK: - TableView Methods
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println("Count: %lu", looksArray.count)
+        println("Count: \(looksArray.count)")
         return looksArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
-        cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier:"cell")
+//        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+//        cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier:"cell")
+//        
+//        
+//        NSString *cellIdentifier =@"Cell"; //we've replaced string with this
+//        
+//        TunesTableViewCell *cell = (TunesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier("closetLookCell") as! ClosetLookTableViewCell
+//         :UILabel!
+//        @IBOutlet var  :UILabel!
+//        @IBOutlet var  :UILabel!
+//        @IBOutlet var lastWornLabel :UILabel!
+//        @IBOutlet var  :UILabel!
+//        @IBOutlet var  :UIImageView!
+//        @IBOutlet var  :UIImageView!
+
+ 
+        
+        
         let currentLook = looksArray[indexPath.row]
-        cell.textLabel!.text = currentLook.lookName
+        cell.lookNumberLabel!.text = "Look No. \(currentLook.lookNumber)"
         
-        var totalDates = 0
+        cell.lookNameLabel!.text = currentLook.lookName
+        cell.seasonLabel!.text = "Season: \(currentLook.lookSeason)"
+        
+        
         let dateWornSet = currentLook.relationshipLookLookDates
+        var sortDescriptor = NSSortDescriptor(key: "dateWorn", ascending: false)
+        var dateWornSortedArray = dateWornSet.sortedArrayUsingDescriptors([sortDescriptor])
         
-        for dateWorn in dateWornSet {
-            totalDates++
+        var lastLookDate = dateWornSortedArray.first as! LookDates
+        
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "MMMM d, yyyy"
+        
+        //lastWornDateLabel.text = "\(formatter.stringFromDate(lastLookDate.dateWorn))"
+        var timesWorn = "\(dateWornSet.count)"
+
+        
+        cell.lastWornLabel.text = "Last Worn: \(formatter.stringFromDate(lastLookDate.dateWorn))"
+        
+        
+        cell.timesWornLabel!.text = "Time Worn: \(timesWorn)"
+        
+        if currentLook.lookFave == true {
+        cell.faveImageView!.image = UIImage(named: "red-heart")
+        } else if currentLook.lookFave == false {
+        cell.faveImageView!.image = UIImage(named: "grey-heart")
         }
         
-        
-        cell.detailTextLabel!.text = "\(totalDates)"
+        cell.lookImageView!.image = UIImage(named: getDocumentPathForFile(currentLook.lookImageName))
+
         
         return cell
     }
@@ -154,8 +259,91 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        let deleteAction = UITableViewRowAction(style: .Normal, title: "Delete") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+            println("Delete")
+            //dial the phone code
+            
+            self.deleteLookIndexPath = indexPath
+            let lookToDelete = self.looksArray[indexPath.row]
+            
+            self.confirmDelete("Look No. \(lookToDelete.lookNumber)")
+            
+        }
+        
+        deleteAction.backgroundColor = UIColor.redColor()
+      
+        
+        let faveAction = UITableViewRowAction(style: .Normal, title: "Fave") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+            println("Fave")
+            
+            let lookToFave = self.looksArray[indexPath.row]
+            
+            if lookToFave.lookFave == false {
+                lookToFave.lookFave = true
+             } else if lookToFave.lookFave == true {
+                lookToFave.lookFave = false
+             }
+          
+            self.appDelegate.saveContext()
+            self.looksTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+            
+        }
+        faveAction.backgroundColor = UIColor(red: 255/255, green: 67/255, blue: 242/255, alpha: 1)
+
+        
+        return [deleteAction, faveAction]
+        
+        
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+    }
+
+    // Delete Confirmation and Handling
+    func confirmDelete(look: String) {
+        let alert = UIAlertController(title: "Delete Look", message: "Are you sure you want to permanently delete \(look)?", preferredStyle: .ActionSheet)
+        
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteLook)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDeleteLook)
+        
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func handleDeleteLook(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deleteLookIndexPath {
+            
+//            managedObjectContext.deleteObject(looksArray[indexPath.row])
+//            appDelegate.saveContext()
+//            looksTableView.reloadData()
+//            
+            
+            looksTableView.beginUpdates()
+            
+            managedObjectContext.deleteObject(looksArray[indexPath.row])
+            
+            looksArray.removeAtIndex(indexPath.row)
+            
+            // Note that indexPath is wrapped in an array:  [indexPath]
+            looksTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            
+            deleteLookIndexPath = nil
+            appDelegate.saveContext()
+            looksTableView.endUpdates()
+        }
+    }
+    
+    func cancelDeleteLook(alertAction: UIAlertAction!) {
+        deleteLookIndexPath = nil
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var destController = segue.destinationViewController as! DetailViewController
+        var destController = segue.destinationViewController as! SelfieViewController
         
         //var x = 1 as Float // same as this
         if segue.identifier == "editToDetailSegue" {
@@ -190,7 +378,7 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        looksArray = fetchLooks("")
+        looksArray = searchLooks()
         looksTableView.reloadData()
         
     }
