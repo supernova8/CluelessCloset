@@ -25,6 +25,7 @@ class TabBarViewController: UITabBarController {
                 let navVC = vControllers[2] as! UINavigationController
                 let selfieVC = navVC.viewControllers![0] as! SelfieViewController
                 selfieVC.newLook = nil
+                selfieVC.selfiePhoto = nil
             }
             
             //[2] as! SelfieViewController

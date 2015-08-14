@@ -17,6 +17,7 @@ class ClosetLookTableViewCell: UITableViewCell {
     @IBOutlet var timesWornLabel :UILabel!
     @IBOutlet var lookImageView :UIImageView!
     @IBOutlet var faveImageView :UIImageView!
+    @IBOutlet var faveButton :UIButton!
 
     
     

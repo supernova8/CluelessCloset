@@ -31,6 +31,8 @@
 		2D2EF79A1B78FD7B009D0F96 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF7991B78FD7B009D0F96 /* Settings.swift */; };
 		2D2EF79E1B793FD1009D0F96 /* Looks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF79D1B793FD1009D0F96 /* Looks.swift */; };
 		2D2EF7A01B7C13D8009D0F96 /* ClosetLookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EF79F1B7C13D8009D0F96 /* ClosetLookTableViewCell.swift */; };
+		2DF6C0B41B7D0C3B0042AC87 /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0B31B7D0C3B0042AC87 /* CarouselCollectionViewCell.swift */; };
+		2DF6C0B61B7D0D4E0042AC87 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0B51B7D0D4E0042AC87 /* CarouselViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		2D2EF7991B78FD7B009D0F96 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		2D2EF79D1B793FD1009D0F96 /* Looks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Looks.swift; sourceTree = "<group>"; };
 		2D2EF79F1B7C13D8009D0F96 /* ClosetLookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosetLookTableViewCell.swift; sourceTree = "<group>"; };
+		2DF6C0B31B7D0C3B0042AC87 /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
+		2DF6C0B51B7D0D4E0042AC87 /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,10 +120,12 @@
 				2D2EF73B1B715BC3009D0F96 /* AppDelegate.swift */,
 				2D2EF75F1B715E19009D0F96 /* SelfieViewController.swift */,
 				2D2EF73D1B715BC3009D0F96 /* ClosetViewController.swift */,
+				2DF6C0B51B7D0D4E0042AC87 /* CarouselViewController.swift */,
 				2D2EF7971B78EDC5009D0F96 /* TabBarViewController.swift */,
 				2D2EF73F1B715BC3009D0F96 /* SecondViewController.swift */,
 				2D2EF7611B724DB3009D0F96 /* DetailViewController.swift */,
 				2D2EF7411B715BC3009D0F96 /* Main.storyboard */,
+				2DF6C0B31B7D0C3B0042AC87 /* CarouselCollectionViewCell.swift */,
 				2D2EF79F1B7C13D8009D0F96 /* ClosetLookTableViewCell.swift */,
 				2D2EF7951B75402A009D0F96 /* DoubleSegControlTableViewCell.swift */,
 				2D2EF78E1B73E89A009D0F96 /* ButtonTableViewCell.swift */,
@@ -267,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DF6C0B61B7D0D4E0042AC87 /* CarouselViewController.swift in Sources */,
 				2D2EF7831B73BA13009D0F96 /* PhotoTableViewCell.swift in Sources */,
 				2D2EF7601B715E19009D0F96 /* SelfieViewController.swift in Sources */,
 				2D2EF7A01B7C13D8009D0F96 /* ClosetLookTableViewCell.swift in Sources */,
@@ -274,6 +281,7 @@
 				2D2EF78F1B73E89A009D0F96 /* ButtonTableViewCell.swift in Sources */,
 				2D2EF7981B78EDC5009D0F96 /* TabBarViewController.swift in Sources */,
 				2D2EF7871B73BE49009D0F96 /* SegControlTableViewCell.swift in Sources */,
+				2DF6C0B41B7D0C3B0042AC87 /* CarouselCollectionViewCell.swift in Sources */,
 				2D2EF77D1B72DCE9009D0F96 /* Closets.swift in Sources */,
 				2D2EF78B1B73E679009D0F96 /* DatePickerTableViewCell.swift in Sources */,
 				2D2EF7961B75402A009D0F96 /* DoubleSegControlTableViewCell.swift in Sources */,
@@ -488,6 +496,7 @@
 				2D2EF7591B715BC3009D0F96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2D2EF75A1B715BC3009D0F96 /* Build configuration list for PBXNativeTarget "CluelessClosetTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +505,7 @@
 				2D2EF75C1B715BC3009D0F96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

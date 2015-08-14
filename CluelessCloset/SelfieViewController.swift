@@ -96,6 +96,52 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
     }
     
+    func createClosetAndSettings() {
+        
+        println("Fetch Image and Look Numbers")
+//        let fetchRequest :NSFetchRequest = NSFetchRequest(entityName: "Closets")
+//        
+//        //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lookNumber", ascending: true), NSSortDescriptor(key: "lookName", ascending:true)]
+//        
+//        var error :NSError?
+//        let fetchresults = managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Closets]
+        
+
+        println("Create New Closet, Name and Description")
+        
+        let entityDescription : NSEntityDescription! = NSEntityDescription.entityForName("Closets", inManagedObjectContext: managedObjectContext)
+        
+        var newCloset = Closets(entity: entityDescription, insertIntoManagedObjectContext: managedObjectContext)
+        
+        newCloset.closetName = "Default"
+        newCloset.closetDescription = "The First Closet!"
+        
+        appDelegate.saveContext()
+        println("New Closet Added")
+        
+        println("Fetch Image and Look Numbers")
+//        let fetchRequestS :NSFetchRequest = NSFetchRequest(entityName: "Settings")
+//        
+//        //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lookNumber", ascending: true), NSSortDescriptor(key: "lookName", ascending:true)]
+//        
+//        var errorS :NSError?
+//        let fetchresultsS = managedObjectContext!.executeFetchRequest(fetchRequest, error: &errorS) as? [Settings]
+//        
+        println("Create New Image and Look Numbers")
+        
+        let entityDescriptionS : NSEntityDescription! = NSEntityDescription.entityForName("Settings", inManagedObjectContext: managedObjectContext)
+        
+        var newSetting = Settings(entity: entityDescriptionS, insertIntoManagedObjectContext: managedObjectContext)
+        
+        newSetting.imageNameCounter = 1 as Int
+        newSetting.lookNumberCounter = 1 as Int
+        
+        appDelegate.saveContext()
+        println("New Setting Add")
+        
+
+        
+    }
     func fetchCloset() -> Closets {
         println("Fetch Image and Look Numbers")
         let fetchRequest :NSFetchRequest = NSFetchRequest(entityName: "Closets")
@@ -104,13 +150,13 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         var error :NSError?
         let fetchresults = managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Closets]
-//        
-//        if let fetchresultsArray = fetchresults {
-//            let currentCloset = fetchresultsArray[0] as Closets
-//            println("Return CLoset Name and Description: \(currentCloset.closetName), \(currentCloset.closetDescription)")
-//            
-//            return currentCloset
-//        } else {
+        
+        if let fetchresultsArray = fetchresults {
+            let currentCloset = fetchresultsArray[0] as Closets
+            println("Return CLoset Name and Description: \(currentCloset.closetName), \(currentCloset.closetDescription)")
+            
+            return currentCloset
+        } else {
         
             println("Create New Closet, Name and Description")
             
@@ -124,7 +170,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             appDelegate.saveContext()
             println("New Closet Add")
             return newCloset
-       // }
+        }
     }
 
     
@@ -138,12 +184,12 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         var error :NSError?
         let fetchresults = managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as? [Settings]
         
-//        if let fetchresultsArray = fetchresults {
-//            let currentSets = fetchresultsArray[0] as Settings
-//            println("Return Image and Look Numbers: \(currentSets.imageNameCounter),  \(currentSets.lookNumberCounter)")
-//            
-//            return currentSets
-//        } else {
+        if let fetchresultsArray = fetchresults {
+            let currentSets = fetchresultsArray[0] as Settings
+            println("Return Image and Look Numbers: \(currentSets.imageNameCounter),  \(currentSets.lookNumberCounter)")
+            
+            return currentSets
+        } else {
         
             println("Create New Image and Look Numbers")
             
@@ -157,7 +203,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             appDelegate.saveContext()
             println("New Setting Add")
             return newSetting
-       // }
+        }
     }
     
 
@@ -1130,6 +1176,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
          selfieTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
+        //createClosetAndSettings()
         
            }
     override func viewWillAppear(animated: Bool) {

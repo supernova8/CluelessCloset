@@ -16,9 +16,11 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var looksArray = [Looks]()
     var deleteLookIndexPath: NSIndexPath? = nil
+    var lookToFaveIndexPath: NSIndexPath? = nil
     
     @IBOutlet var lookSearchBar :UISearchBar!
     @IBOutlet var looksTableView :UITableView!
+    @IBOutlet private var editBarButtonItem :UIBarButtonItem!
     
     //MARK: - Core Methods
     
@@ -100,6 +102,17 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+    @IBAction private func editButtonPressed(sender: UIBarButtonItem!) {
+        if looksTableView.editing {
+            looksTableView.setEditing(false, animated: true)
+            editBarButtonItem.title = "Edit"
+        } else {
+            looksTableView.setEditing(true, animated: true)
+            editBarButtonItem.title = "Done"
+        }
+    }
+
+    
     @IBAction func searchBarSearchButtonClicked(sender: UISearchBar) {
         
         sender.resignFirstResponder()
@@ -167,10 +180,23 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lookNumber", ascending: true), NSSortDescriptor(key: "lookName", ascending:true)]
         
         if count(searchString) > 0 {
+            
+            if searchString.capitalizedString == "Fave" || searchString.capitalizedString == "Fav" || searchString.capitalizedString == "Favorite" {
+                
+                    println("Fave!!")
+                
+            let predicate = NSPredicate(format: "lookFave == 1")
+                
+                fetchRequest.predicate = predicate
+
+            } else {
 
         let predicate = NSPredicate(format: "lookTags contains[cd] %@ or lookName contains[cd] %@ or lookAccessoryType contains[cd] %@ or lookBottomType contains[cd] %@ or lookDressType contains[cd] %@ or lookNumber contains[cd] %@ or lookOuterwearType contains[cd] %@ or lookSeason contains[cd] %@ or lookShoeType contains[cd] %@ or lookTopType contains[cd] %@", searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString)
-        
-        fetchRequest.predicate = predicate
+           
+                fetchRequest.predicate = predicate
+
+            }
+        //fetchRequest.predicate = predicate
         }
         //var predicate = NSPredicate.
         
@@ -243,9 +269,13 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.timesWornLabel!.text = "Time Worn: \(timesWorn)"
         
         if currentLook.lookFave == true {
-        cell.faveImageView!.image = UIImage(named: "red-heart")
+        //cell.faveImageView!.image = UIImage(named: "pink-heart-full")
+        cell.faveButton!.setImage(UIImage(named: "pink-heart-full"), forState: .Normal)
+
         } else if currentLook.lookFave == false {
-        cell.faveImageView!.image = UIImage(named: "grey-heart")
+        //cell.faveImageView!.image = UIImage(named: "pink-heart-empty")
+        cell.faveButton!.setImage(UIImage(named: "pink-heart-empty"), forState: .Normal)
+      
         }
         
         cell.lookImageView!.image = UIImage(named: getDocumentPathForFile(currentLook.lookImageName))
@@ -274,25 +304,32 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         deleteAction.backgroundColor = UIColor.redColor()
       
         
-        let faveAction = UITableViewRowAction(style: .Normal, title: "Fave") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
-            println("Fave")
-            
-            let lookToFave = self.looksArray[indexPath.row]
-            
-            if lookToFave.lookFave == false {
-                lookToFave.lookFave = true
-             } else if lookToFave.lookFave == true {
-                lookToFave.lookFave = false
-             }
-          
-            self.appDelegate.saveContext()
-            self.looksTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
-            
-        }
-        faveAction.backgroundColor = UIColor(red: 255/255, green: 67/255, blue: 242/255, alpha: 1)
+//        let faveAction = UITableViewRowAction(style: .Normal, title: "Fave") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+//            println("Fave")
+//            
+//            
+//            self.lookToFaveIndexPath = indexPath
+//            self.lookToFave()
+//            
+//            
+//            let lookToFave = self.looksArray[indexPath.row]
+//            
+//            if lookToFave.lookFave == false {
+//                lookToFave.lookFave = true
+//             } else if lookToFave.lookFave == true {
+//                lookToFave.lookFave = false
+//             }
+//          
+//            self.appDelegate.saveContext()
+//            self.looksTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+//            
+//        }
+//        faveAction.backgroundColor = UIColor(red: 255/255, green: 67/255, blue: 242/255, alpha: 1)
 
         
-        return [deleteAction, faveAction]
+        //return [deleteAction, faveAction]
+        
+        return [deleteAction]
         
         
     }
@@ -302,6 +339,36 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
 
+   @IBAction func faveButtonTapped(sender: AnyObject) {
+        println("Fave Button Tapped")
+    
+    let textFieldPosition = sender.convertPoint(CGPointZero, toView: looksTableView)
+    if let indexPath = looksTableView.indexPathForRowAtPoint(textFieldPosition) {
+    
+    //let cell = looksTableView.cellForRowAtIndexPath(indexPath!)
+
+    
+        //if let indexPath = lookToFaveIndexPath {
+            println("Look To Fave")
+            
+            looksTableView.beginUpdates()
+            
+            let lookToFave = self.looksArray[indexPath.row]
+            
+            if lookToFave.lookFave == false {
+                lookToFave.lookFave = true
+            } else if lookToFave.lookFave == true {
+                lookToFave.lookFave = false
+            }
+            
+            appDelegate.saveContext()
+            looksTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+
+            looksTableView.endUpdates()
+        }
+        
+    }
+    
     // Delete Confirmation and Handling
     func confirmDelete(look: String) {
         let alert = UIAlertController(title: "Delete Look", message: "Are you sure you want to permanently delete \(look)?", preferredStyle: .ActionSheet)
