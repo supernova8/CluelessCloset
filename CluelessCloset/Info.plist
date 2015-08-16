@@ -26,6 +26,27 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>goudy_bookletter_1911-webfont.ttf</string>
+		<string>HaloHandletter.ttf</string>
+		<string>MarketingScript.ttf</string>
+		<string>PR8 Charade.ttf</string>
+		<string>Big Surprise.ttf</string>
+		<string>black_jack.ttf</string>
+		<string>budmo jiggler.ttf</string>
+		<string>daisy.ttf</string>
+		<string>Demo_Delinquente_altl.ttf</string>
+		<string>gnuolane rg.ttf</string>
+		<string>BEBAS___.ttf</string>
+		<string>BebasNeue Bold.ttf</string>
+		<string>BebasNeue Book.ttf</string>
+		<string>BebasNeue Light.ttf</string>
+		<string>BebasNeue Regular.ttf</string>
+		<string>BebasNeue Thin.ttf</string>
+		<string>AbrahamLincoln.ttf</string>
+		<string>Pacifico.ttf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

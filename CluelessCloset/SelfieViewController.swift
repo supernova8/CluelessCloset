@@ -17,6 +17,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     
     var selectedLook        :Looks? //unwrapped so it can be nil
     var newLook     :Looks! //not wrapped
+    var selectedLookDate :LookDates? //not wrapped
     private var newLookDate :LookDates! //not wrapped
     var currentSettings     :Settings!
     var currentCloset       :Closets!
@@ -273,20 +274,33 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
             //photoCell.galleryButton.addTarget(self, action: galleryButtonTapped:", forControlEvents: UIControlEvents.EditingChanged)
             //photoCell.cellLabel.text = infoEntryFieldArray[indexPath.row]
-            photoCell.saveToCameraRollSwitch.addTarget(self, action: "saveToCameraRollSwitchChanged:", forControlEvents: UIControlEvents.ValueChanged)
+            
+//            photoCell.saveToCameraRollSwitch.addTarget(self, action: "saveToCameraRollSwitchChanged:", forControlEvents: UIControlEvents.ValueChanged)
+//            photoCell.selectionStyle = UITableViewCellSelectionStyle.None
+            
+            //photoCell.saveToCameraRollSwitch.addTarget(self, action: "saveToCameraRollSwitchChanged:", forControlEvents: UIControlEvents.ValueChanged)
             photoCell.selectionStyle = UITableViewCellSelectionStyle.None
+            
             
             if (haveSelfie == false) {
                 println("Have Selfie? \(haveSelfie)")
-                photoCell.saveToCameraRollSwitch.userInteractionEnabled = false
-                photoCell.saveToCameraRollLabel.textColor = UIColor.lightGrayColor()
-                photoCell.saveToCameraRollView.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
+                //photoCell.saveToCameraRollButton.selected = false
+                photoCell.saveToCameraRollButton.hidden = false
+                photoCell.saveToCameraRollButton.enabled = false
+                //photoCell.saveToCameraRollLabel.textColor = UIColor.lightGrayColor()
+                //photoCell.saveToCameraRollView.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
+                
+//                photoCell.saveToCameraRollSwitch.userInteractionEnabled = false
+//                photoCell.saveToCameraRollLabel.textColor = UIColor.lightGrayColor()
+//                photoCell.saveToCameraRollView.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
                 //segControlCell.cellSegControl.enabled = false
             } else {
                 println("Have Selfie? \(haveSelfie)")
-                photoCell.saveToCameraRollSwitch.userInteractionEnabled = true
-                photoCell.saveToCameraRollLabel.textColor = UIColor(red: 127/255, green: 188/255, blue: 163/255, alpha: 1)
-                photoCell.saveToCameraRollView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+                photoCell.saveToCameraRollButton.hidden = false
+                photoCell.saveToCameraRollButton.enabled = true
+//                photoCell.saveToCameraRollSwitch.userInteractionEnabled = true
+//                photoCell.saveToCameraRollLabel.textColor = UIColor(red: 127/255, green: 188/255, blue: 163/255, alpha: 1)
+//                photoCell.saveToCameraRollView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
 
                 //segControlCell.cellSegControl.enabled = true
             }
@@ -354,8 +368,8 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                     println("Have Selfie? \(haveSelfie)")
                     labelCell.userInteractionEnabled = true
                     labelCell.cellLabel.textColor = UIColor.blackColor()
-                    labelCell.backgroundColor = UIColor.whiteColor()
-                    labelCell.cellDateLabel.textColor = UIColor.blackColor()
+                    labelCell.backgroundColor = UIColor.brightTurqColor()
+                    labelCell.cellDateLabel.textColor = UIColor.brightPinkColor()
                 }
                 
                 
@@ -402,13 +416,13 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                     println("Have Selfie? \(haveSelfie)")
                     segControlCell.userInteractionEnabled = false
                     segControlCell.cellLabel.textColor = UIColor.lightGrayColor()
-                    segControlCell.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
+                    segControlCell.backgroundColor = UIColor.tealColor()
                     segControlCell.cellSegControl.enabled = false
                 } else {
                     println("Have Selfie? \(haveSelfie)")
                     segControlCell.userInteractionEnabled = true
                     segControlCell.cellLabel.textColor = UIColor.blackColor()
-                    segControlCell.backgroundColor = UIColor.whiteColor()
+                    segControlCell.backgroundColor = UIColor.tealColor()
                     segControlCell.cellSegControl.enabled = true
                 }
                 
@@ -712,7 +726,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                     println("Have Selfie? \(haveSelfie)")
                     dblSegControlCell.userInteractionEnabled = true
                     dblSegControlCell.cellLabel.textColor = UIColor.blackColor()
-                    dblSegControlCell.backgroundColor = UIColor.whiteColor()
+                    dblSegControlCell.backgroundColor = UIColor.tealColor()
                     dblSegControlCell.cellSegControl.enabled = true
                     dblSegControlCell.cellSegControl2.enabled = true
                 }
@@ -744,6 +758,43 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         //return cell
     }
 
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        println("IndexPath")
+//        if indexPath.section == 1 && infoFieldTypeArray[indexPath.row] == "labelCell" {
+//            
+//            let cell = tableView.cellForRowAtIndexPath(indexPath) as! LabelTableViewCell
+//            if cell.cellLabel.text == "Date Worn:" {
+//                let nextIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
+//                let nextCell = tableView.cellForRowAtIndexPath(nextIndexPath)
+//                if nextCell is DatePickerTableViewCell {
+//                    infoEntryFieldArray.removeAtIndex(nextIndexPath.row)
+//                    infoFieldTypeArray.removeAtIndex(nextIndexPath.row)
+//                    //cell.cellDateLabel.textColor = UIColor.blackColor();
+//                    
+//                } else {
+//                    //cell.cellDateLabel.textColor = UIColor.redColor();
+//                    infoEntryFieldArray.insert("New Worn Date", atIndex: indexPath.row + 1)
+//                    infoFieldTypeArray.insert("datePickerCell", atIndex: indexPath.row + 1)
+//                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
+//                }
+//                var theSet = NSMutableIndexSet.new()
+//                theSet.addIndex(indexPath.section)
+//                tableView.reloadSections( theSet, withRowAnimation: UITableViewRowAnimation.Automatic)
+
+//                println("The Set Count: \(theSet.count)")
+//                //tableView.reloadRowsAtIndexPaths(, withRowAnimation: UITableViewRowAnimation.Top)
+//                
+//                //looksTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+//                //tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
+//                tableView.reloadData()
+//                println("The Set Count: \(theSet.count)")
+//            }
+//            println("LabelCell")
+//        } else {
+//        println("Cell")
+//        }
+//    }
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("IndexPath")
         if indexPath.section == 1 && infoFieldTypeArray[indexPath.row] == "labelCell" {
@@ -764,7 +815,8 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 }
                 var theSet = NSMutableIndexSet.new()
                 theSet.addIndex(indexPath.section)
-                tableView.reloadSections( theSet, withRowAnimation: UITableViewRowAnimation.None)
+                println("The Set Count: \(indexPath.section)")
+                tableView.reloadSections( theSet, withRowAnimation: UITableViewRowAnimation.Automatic)
                 
                 
                 //tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
@@ -773,16 +825,20 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             println("LabelCell")
             
         } else {
-        println("Cell")
+            println("Cell")
         }
     }
-
     
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
         if photoFieldTypeArray[indexPath.row] == "photoCell" {
-            return 350.0
+            //return 350.0
+            
+            //let collectionViewWidth = selfieTableView.bounds.size.width
+            let collectionViewHeight = selfieTableView.bounds.size.height - 100.0
+            return collectionViewHeight
+            
         }
         }
         if indexPath.section == 1 {
@@ -916,9 +972,9 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         println("Pices Bottom Row Add")
     }
 
-    func saveToCameraRollSwitchChanged(camSwitch: UISwitch) {
+    @IBAction func saveToCameraRollSwitchChanged(camButton: UIButton) {
        
-        saveToCameraRoll = camSwitch.on
+        saveToCameraRoll = camButton.selected
         
         saveImage()
         
@@ -1184,22 +1240,42 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         
         if let unwrappedLook = selectedLook {
-            
+           
             //from tapped row
             println("From Somewhere")
             newLook = unwrappedLook
             
-            let dateWornSet = newLook.relationshipLookLookDates
-            var sortDescriptor = NSSortDescriptor(key: "dateWorn", ascending: false)
-            var dateWornSortedArray = dateWornSet.sortedArrayUsingDescriptors([sortDescriptor])
+            //if from Calendar then selected date is not nil
             
-            newLookDate = dateWornSortedArray.first as! LookDates
+            if let unwrappedLookDate = selectedLookDate {
+                println("From Calendar")
+            
+              let dateWornSet = newLook.relationshipLookLookDates
+//            var sortDescriptor = NSSortDescriptor(key: "dateWorn", ascending: false)
+//            var dateWornSortedArray = dateWornSet.sortedArrayUsingDescriptors([sortDescriptor])
+            
+                timesWorn = "\(dateWornSet.count)"
+                
+            newLookDate = unwrappedLookDate
+                
+            } else {
+            
+                    //display last worn date
+                let dateWornSet = newLook.relationshipLookLookDates
+                var sortDescriptor = NSSortDescriptor(key: "dateWorn", ascending: false)
+                var dateWornSortedArray = dateWornSet.sortedArrayUsingDescriptors([sortDescriptor])
+                
+                timesWorn = "\(dateWornSet.count)"
+                
+                newLookDate = dateWornSortedArray.first as! LookDates
+            }
             
             var formatter = NSDateFormatter()
             formatter.dateFormat = "EEEE, MMMM d, yyyy"
             
+            
             //lastWornDateLabel.text = "\(formatter.stringFromDate(lastLookDate.dateWorn))"
-            timesWorn = "\(dateWornSet.count)"
+//            timesWorn = "\(dateWornSet.count)"
             
             
             // FIGURE OUT THE DATE STUFF LATER - CALENDAT VS. CLOSET, ETC.
@@ -1238,7 +1314,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 faveButton.image = UIImage(named: "heart-full")
                 faveButton.tag = 1
                 
-                println("Now a Fave")
+                println("It's a Fave")
                 
             }
 //            else if newLook.lookFave == fa {
@@ -1263,7 +1339,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
           
         }
-        
+        print(newLook)
         //looksArray = fetchLooks("")
         selfieTableView.reloadData()
         

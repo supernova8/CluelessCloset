@@ -3,11 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "carousel_tab.png"
+      "filename" : "selfie_frame.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "selfie_frame@2x.png"
     },
     {
       "idiom" : "universal",

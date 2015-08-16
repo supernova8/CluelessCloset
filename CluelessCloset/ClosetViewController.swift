@@ -266,7 +266,7 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.lastWornLabel.text = "Last Worn: \(formatter.stringFromDate(lastLookDate.dateWorn))"
         
         
-        cell.timesWornLabel!.text = "Time Worn: \(timesWorn)"
+        cell.timesWornLabel!.text = "Times Worn: \(timesWorn)"
         
         if currentLook.lookFave == true {
         //cell.faveImageView!.image = UIImage(named: "pink-heart-full")

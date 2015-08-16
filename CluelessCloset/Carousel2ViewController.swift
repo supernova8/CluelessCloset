@@ -1,8 +1,8 @@
 //
-//  CarouselViewController.swift
+//  Carousel2ViewController.swift
 //  CluelessCloset
 //
-//  Created by Sonova Middleton on 8/13/15.
+//  Created by Sonova Middleton on 8/15/15.
 //  Copyright (c) 2015 supernova8productions. All rights reserved.
 //
 
@@ -13,8 +13,8 @@ import AVFoundation
 import AudioToolbox
 
 
-class CarouselViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout   {
-
+class Carousel2ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout   {
+    
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let managedObjectContext:NSManagedObjectContext! = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -41,31 +41,31 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lookNumber", ascending: true), NSSortDescriptor(key: "lookName", ascending:true)]
         
-//        if count(searchString) > 0 {
-//            
-//            if searchString.capitalizedString == "Fave" || searchString.capitalizedString == "Fav" || searchString.capitalizedString == "Favorite" {
-//                
-//                println("Fave!!")
-//                
-//                let predicate = NSPredicate(format: "lookFave == 1")
-//                
-//                fetchRequest.predicate = predicate
-//                
-//            } else {
-//                
-//                let predicate = NSPredicate(format: "lookTags contains[cd] %@ or lookName contains[cd] %@ or lookAccessoryType contains[cd] %@ or lookBottomType contains[cd] %@ or lookDressType contains[cd] %@ or lookNumber contains[cd] %@ or lookOuterwearType contains[cd] %@ or lookSeason contains[cd] %@ or lookShoeType contains[cd] %@ or lookTopType contains[cd] %@", searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString)
-//                
-//                fetchRequest.predicate = predicate
-//                
-//            }
-            //fetchRequest.predicate = predicate
+        //        if count(searchString) > 0 {
+        //
+        //            if searchString.capitalizedString == "Fave" || searchString.capitalizedString == "Fav" || searchString.capitalizedString == "Favorite" {
+        //
+        //                println("Fave!!")
+        //
+        //                let predicate = NSPredicate(format: "lookFave == 1")
+        //
+        //                fetchRequest.predicate = predicate
+        //
+        //            } else {
+        //
+        //                let predicate = NSPredicate(format: "lookTags contains[cd] %@ or lookName contains[cd] %@ or lookAccessoryType contains[cd] %@ or lookBottomType contains[cd] %@ or lookDressType contains[cd] %@ or lookNumber contains[cd] %@ or lookOuterwearType contains[cd] %@ or lookSeason contains[cd] %@ or lookShoeType contains[cd] %@ or lookTopType contains[cd] %@", searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString, searchString)
+        //
+        //                fetchRequest.predicate = predicate
+        //
+        //            }
+        //fetchRequest.predicate = predicate
         //}
         //var predicate = NSPredicate.
         
         return managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as! [Looks]
         
     }
-
+    
     func getDocumentPathForFile(filename: String) -> String {
         
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
@@ -74,7 +74,7 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         
         
     }
-
+    
     //MARK: - interactivity
     
     @IBAction func faveButtonTapped(sender: AnyObject) {
@@ -82,7 +82,7 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         
         let textFieldPosition = sender.convertPoint(CGPointZero, toView: looksCollectionView)
         if let indexPath = looksCollectionView.indexPathForItemAtPoint(textFieldPosition) {
-        
+            
             
             
             //let cell = looksTableView.cellForRowAtIndexPath(indexPath!)
@@ -108,7 +108,7 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         
     }
-
+    
     @IBAction func shuffleButtonTapped(sender: AnyObject) {
         
         var randomNum = Int(arc4random_uniform(UInt32(looksArray.count)))
@@ -116,10 +116,6 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         println("YourRandom Number: \(randomNum)")
         
         if (lastRandomNum == nil) {
-            while (randomNum == 0) {
-                println("First random is a zero")
-                randomNum = Int(arc4random_uniform(UInt32(looksArray.count)))
-            }
             lastRandomNum = randomNum
             
         } else { //Have a lastRandomNum
@@ -156,60 +152,60 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
-@IBAction func wearAgainButtonTapped(sender: AnyObject) {
-    
-    println("Wear It Again Button Tapped")
-    
-    let textFieldPosition = sender.convertPoint(CGPointZero, toView: looksCollectionView)
-    //if let indexPath = looksCollectionView.indexPathForItemAtPoint(textFieldPosition) {
-    if let indexPath = looksCollectionView.indexPathsForVisibleItems().first as? NSIndexPath  {
+    @IBAction func wearAgainButtonTapped(sender: AnyObject) {
+        
+        println("Wear It Again Button Tapped")
+        
+        let textFieldPosition = sender.convertPoint(CGPointZero, toView: looksCollectionView)
+        //if let indexPath = looksCollectionView.indexPathForItemAtPoint(textFieldPosition) {
+        if let indexPath = looksCollectionView.indexPathsForVisibleItems().first as? NSIndexPath  {
+            
+            
+            
+            //let cell = looksTableView.cellForRowAtIndexPath(indexPath!)
+            
+            
+            //if let indexPath = lookToFaveIndexPath {
+            //        println("Look To Fave")
+            
+            
+            let lookToWearAgain = self.looksArray[indexPath.row]
+            
+            let dateWornSet = lookToWearAgain.relationshipLookLookDates
+            var sortDescriptor = NSSortDescriptor(key: "dateWorn", ascending: false)
+            var dateWornSortedArray = dateWornSet.sortedArrayUsingDescriptors([sortDescriptor])
+            
+            var lastLookDate = dateWornSortedArray.first as! LookDates
+            
+            var formatter = NSDateFormatter()
+            formatter.dateFormat = "MMMM d, yyyy"
+            
+            //lastWornDateLabel.text = "\(formatter.stringFromDate(lastLookDate.dateWorn))"
+            var timesWorn = "\(dateWornSet.count)"
+            
+            
+            println("Last Worn: \(formatter.stringFromDate(lastLookDate.dateWorn))")
+            
+            let entityDescription2 : NSEntityDescription! = NSEntityDescription.entityForName("LookDates", inManagedObjectContext: managedObjectContext)
+            
+            var newLookDate = LookDates(entity: entityDescription2, insertIntoManagedObjectContext: managedObjectContext)
+            
+            newLookDate.dateWorn = NSDate()
+            newLookDate.dateUpdated = NSDate()
+            newLookDate.dateAdded = NSDate()
+            newLookDate.dateOccasion = ""
+            
+            newLookDate.relationshipLookDateLook = lookToWearAgain
+            
+            appDelegate.saveContext()
+            looksCollectionView.reloadItemsAtIndexPaths([indexPath])
+            
+            //looksTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+            
+            
+        }
         
         
-        
-        //let cell = looksTableView.cellForRowAtIndexPath(indexPath!)
-        
-        
-        //if let indexPath = lookToFaveIndexPath {
-//        println("Look To Fave")
-        
-        
-        let lookToWearAgain = self.looksArray[indexPath.row]
-        
-        let dateWornSet = lookToWearAgain.relationshipLookLookDates
-        var sortDescriptor = NSSortDescriptor(key: "dateWorn", ascending: false)
-        var dateWornSortedArray = dateWornSet.sortedArrayUsingDescriptors([sortDescriptor])
-        
-        var lastLookDate = dateWornSortedArray.first as! LookDates
-        
-        var formatter = NSDateFormatter()
-        formatter.dateFormat = "MMMM d, yyyy"
-        
-        //lastWornDateLabel.text = "\(formatter.stringFromDate(lastLookDate.dateWorn))"
-        var timesWorn = "\(dateWornSet.count)"
-        
-        
-        println("Last Worn: \(formatter.stringFromDate(lastLookDate.dateWorn))")
-        
-        let entityDescription2 : NSEntityDescription! = NSEntityDescription.entityForName("LookDates", inManagedObjectContext: managedObjectContext)
-        
-        var newLookDate = LookDates(entity: entityDescription2, insertIntoManagedObjectContext: managedObjectContext)
-        
-        newLookDate.dateWorn = NSDate()
-        newLookDate.dateUpdated = NSDate()
-        newLookDate.dateAdded = NSDate()
-        newLookDate.dateOccasion = ""
-        
-        newLookDate.relationshipLookDateLook = lookToWearAgain
-        
-        appDelegate.saveContext()
-        looksCollectionView.reloadItemsAtIndexPaths([indexPath])
-        
-        //looksTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-        
-        
-    }
-
-    
     }
     
     
@@ -226,39 +222,39 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         var cell :CarouselCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("cCell", forIndexPath: indexPath) as! CarouselCollectionViewCell
         
         let currentLook = looksArray[indexPath.row]
-        cell.lookNumberLabel!.text = "Look No. \(currentLook.lookNumber)"
-        
-        cell.lookNameLabel!.text = currentLook.lookName
-        //cell.seasonLabel!.text = "Season: \(currentLook.lookSeason)"
-        
-        
-        let dateWornSet = currentLook.relationshipLookLookDates
-        var sortDescriptor = NSSortDescriptor(key: "dateWorn", ascending: false)
-        var dateWornSortedArray = dateWornSet.sortedArrayUsingDescriptors([sortDescriptor])
-        
-        var lastLookDate = dateWornSortedArray.first as! LookDates
-        
-        var formatter = NSDateFormatter()
-        formatter.dateFormat = "MMMM d, yyyy"
-        
-        //lastWornDateLabel.text = "\(formatter.stringFromDate(lastLookDate.dateWorn))"
-        var timesWorn = "\(dateWornSet.count)"
-        
-        
-        cell.lastWornLabel.text = "Last Worn: \(formatter.stringFromDate(lastLookDate.dateWorn))"
-        
-        
-        //cell.timesWornLabel!.text = "Time Worn: \(timesWorn)"
-        
-        if currentLook.lookFave == true {
-            //cell.faveImageView!.image = UIImage(named: "pink-heart-full")
-            cell.faveButton!.setImage(UIImage(named: "pink-heart-full"), forState: .Normal)
-            
-        } else if currentLook.lookFave == false {
-            //cell.faveImageView!.image = UIImage(named: "pink-heart-empty")
-            cell.faveButton!.setImage(UIImage(named: "pink-heart-empty"), forState: .Normal)
-            
-        }
+//        cell.lookNumberLabel!.text = "Look No. \(currentLook.lookNumber)"
+//        
+//        cell.lookNameLabel!.text = currentLook.lookName
+//        //cell.seasonLabel!.text = "Season: \(currentLook.lookSeason)"
+//        
+//        
+//        let dateWornSet = currentLook.relationshipLookLookDates
+//        var sortDescriptor = NSSortDescriptor(key: "dateWorn", ascending: false)
+//        var dateWornSortedArray = dateWornSet.sortedArrayUsingDescriptors([sortDescriptor])
+//        
+//        var lastLookDate = dateWornSortedArray.first as! LookDates
+//        
+//        var formatter = NSDateFormatter()
+//        formatter.dateFormat = "MMMM d, yyyy"
+//        
+//        //lastWornDateLabel.text = "\(formatter.stringFromDate(lastLookDate.dateWorn))"
+//        var timesWorn = "\(dateWornSet.count)"
+//        
+//        
+//        cell.lastWornLabel.text = "Last Worn: \(formatter.stringFromDate(lastLookDate.dateWorn))"
+//        
+//        
+//        //cell.timesWornLabel!.text = "Time Worn: \(timesWorn)"
+//        
+//        if currentLook.lookFave == true {
+//            //cell.faveImageView!.image = UIImage(named: "pink-heart-full")
+//            cell.faveButton!.setImage(UIImage(named: "pink-heart-full"), forState: .Normal)
+//            
+//        } else if currentLook.lookFave == false {
+//            //cell.faveImageView!.image = UIImage(named: "pink-heart-empty")
+//            cell.faveButton!.setImage(UIImage(named: "pink-heart-empty"), forState: .Normal)
+//            
+//        }
         
         cell.lookImageView!.image = UIImage(named: getDocumentPathForFile(currentLook.lookImageName))
         
@@ -269,37 +265,37 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
     
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        return CGSizeMake(435, 535)
+        //        return CGSizeMake(435, 535)
         let collectionViewWidth = self.looksCollectionView.bounds.size.width
         let collectionViewHeight = self.looksCollectionView.bounds.size.height
         return CGSize(width: collectionViewWidth, height: collectionViewHeight)
-    
+        
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//       performSegueWithIdentifier("editToDetailSegue", sender: self)
+        performSegueWithIdentifier("editToDetailSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        var destController = segue.destinationViewController as! SelfieViewController
-//        
-//        //var x = 1 as Float // same as this
-//        if segue.identifier == "editToDetailSegue" {
-//            
-//            let indexPath = looksCollectionView.indexPathsForSelectedItems()[0] as! NSIndexPath
-//            let currentLook = looksArray[indexPath.row]
-//            destController.selectedLook = currentLook
-//            looksCollectionView.deselectItemAtIndexPath(indexPath, animated: true)
-//            
-//        }
-//        
-//            if segue.identifier == "addToDetailSegue" {
-//            destController.selectedLook = nil
-//            
-//        }
-
+        var destController = segue.destinationViewController as! SelfieViewController
+        
+        //var x = 1 as Float // same as this
+        if segue.identifier == "editToDetailSegue" {
+            
+            let indexPath = looksCollectionView.indexPathsForSelectedItems()[0] as! NSIndexPath
+            let currentLook = looksArray[indexPath.row]
+            destController.selectedLook = currentLook
+            looksCollectionView.deselectItemAtIndexPath(indexPath, animated: true)
+            
+        }
+        
+        if segue.identifier == "addToDetailSegue" {
+            destController.selectedLook = nil
+            
+        }
+        
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -308,12 +304,12 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         
         //looksCollectionView.registerClass(UICollectionViewCell.self, forCellReuseIdentifier: "cell")
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         looksArray = fetchLooks()
         looksCollectionView.reloadData()
-
+        
         
     }
     
@@ -322,15 +318,15 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
