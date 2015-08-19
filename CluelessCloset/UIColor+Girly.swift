@@ -53,14 +53,14 @@ extension UIColor {
         return UIColor(red: 255.0/255.0, green: 67.0/255.0, blue: 242.0/255.0, alpha: 1.0)
     }
     
-//    class func nephritisColor() -> UIColor {
-//        return UIColor(red: 39.0/255.0, green: 174.0/255.0, blue: 96.0/255.0, alpha: 1.0)
-//    }
-//    
-//    class func peterRiverColor() -> UIColor {
-//        return UIColor(red: 52.0/255.0, green: 152.0/255.0, blue: 219.0/255.0, alpha: 1.0)
-//    }
-//    
+    class func selfieButtonColor() -> UIColor {
+        return UIColor(red: 214.0/255.0, green: 57.0/255.0, blue: 122.0/255.0, alpha: 1.0)
+    }
+    
+    class func selfieButtonOffColor() -> UIColor {
+        return UIColor(red: 214.0/255.0, green: 57.0/255.0, blue: 122.0/255.0, alpha: 0.8)
+    }
+    
 //    class func belizeHoleColor() -> UIColor {
 //        return UIColor(red: 41.0/255.0, green: 128.0/255.0, blue: 185.0/255.0, alpha: 1.0)
 //    }

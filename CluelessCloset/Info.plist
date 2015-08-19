@@ -28,6 +28,37 @@
 	<string>Main</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Oswald-Medium.ttf</string>
+		<string>Oswald-Regular.ttf</string>
+		<string>Oswald-RegularItalic.ttf</string>
+		<string>Oswald-Bold.ttf</string>
+		<string>Oswald-MediumItalic.ttf</string>
+		<string>Oswald-Extra-LightItalic.ttf</string>
+		<string>Oswald-BoldItalic.ttf</string>
+		<string>Oswald-Demi-BoldItalic.ttf</string>
+		<string>Oswald-DemiBold.ttf</string>
+		<string>Oswald-Extra-LightItalic.ttf</string>
+		<string>Oswald-Extra-Light.ttf</string>
+		<string>Oswald-Heavy.ttf</string>
+		<string>Mf Queen Leela.ttf</string>
+		<string>Marvel-Bold.ttf</string>
+		<string>Oswald-LightItalic.ttf</string>
+		<string>Marvel-BoldItalic.ttf</string>
+		<string>Oswald-Light.ttf</string>
+		<string>Marvel-Italic.ttf</string>
+		<string>HoneyScript-Light.ttf</string>
+		<string>Marvel-Regular.ttf</string>
+		<string>KGManhattanScript.ttf</string>
+		<string>VarickaLC.ttf</string>
+		<string>HoneyScript-SemiBold.ttf</string>
+		<string>Movies.ttf</string>
+		<string>VarickaSC.ttf</string>
+		<string>Montepetrum bold.ttf</string>
+		<string>Montepetrum regular.ttf</string>
+		<string>clingy.ttf</string>
+		<string>Montepetrum Thin.ttf</string>
+		<string>GreatVibes-Regular.otf</string>
+		<string>Munich.ttf</string>
 		<string>goudy_bookletter_1911-webfont.ttf</string>
 		<string>HaloHandletter.ttf</string>
 		<string>MarketingScript.ttf</string>
@@ -46,6 +77,7 @@
 		<string>BebasNeue Thin.ttf</string>
 		<string>AbrahamLincoln.ttf</string>
 		<string>Pacifico.ttf</string>
+		<string>Oswald-HeavyItalic.ttf</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
@@ -65,5 +97,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

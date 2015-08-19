@@ -246,8 +246,8 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let currentLook = looksArray[indexPath.row]
         cell.lookNumberLabel!.text = "Look No. \(currentLook.lookNumber)"
         
-        cell.lookNameLabel!.text = currentLook.lookName
-        cell.seasonLabel!.text = "Season: \(currentLook.lookSeason)"
+        cell.lookNameLabel!.text = "\"\(currentLook.lookName)\""
+        cell.seasonLabel!.text = "\(currentLook.lookSeason) Season"
         
         
         let dateWornSet = currentLook.relationshipLookLookDates
@@ -266,7 +266,7 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.lastWornLabel.text = "Last Worn: \(formatter.stringFromDate(lastLookDate.dateWorn))"
         
         
-        cell.timesWornLabel!.text = "Times Worn: \(timesWorn)"
+        cell.timesWornLabel!.text = "\(timesWorn)"
         
         if currentLook.lookFave == true {
         //cell.faveImageView!.image = UIImage(named: "pink-heart-full")
@@ -280,6 +280,14 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.lookImageView!.image = UIImage(named: getDocumentPathForFile(currentLook.lookImageName))
 
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        //let imageName = "yourImage.png"
+       
+        //let imageView = UIImageView(image: image!)
+        
+//         let image = UIImage(named: "cell_middle.png")
+//        cell.backgroundView = UIImageView(image: image!)
         
         return cell
     }
@@ -339,6 +347,21 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
 
+    func colorForIndex(index: Int) -> UIColor {
+        let itemCount = looksArray.count - 1
+        let color = (CGFloat(index + 3) / CGFloat(itemCount)) * 0.6
+        let color2 = (CGFloat(index) / CGFloat(itemCount)) * 0.95
+        return UIColor(red: 1.0, green: color, blue: 0.95, alpha: 1.0)
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
+        forRowAtIndexPath indexPath: NSIndexPath) {
+            //cell.backgroundColor = colorForIndex(indexPath.row)
+            //cell.backgroundColor = UIColor(red: 1.0, green: 0.67, blue: 0.95, alpha: 1.0)
+    }
+    
+    //MARK: - Interactivity Methods
+    
    @IBAction func faveButtonTapped(sender: AnyObject) {
         println("Fave Button Tapped")
     
@@ -432,6 +455,27 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+//    func configureView() {
+//        
+//        // Change the font and size of nav bar text
+//        if let navBarFont = UIFont(name: "Budmo", size: 30.0) {
+//            println("Carosel font")
+//            let navBarAttributesDictionary: [NSObject: AnyObject]? = [
+//                NSForegroundColorAttributeName: UIColor.brightPinkColor(),
+//                NSFontAttributeName: navBarFont
+//            ]
+//            
+//            navigationController?.navigationBar.titleTextAttributes = navBarAttributesDictionary
+//            //UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: "Budmo"], forState: UIControlState.Normal)
+//            //shuffleBarButtonItem.setTitleTextAttributes([ NSFontAttributeName: UIFont(name: "Didot", size: 26)!], forState: UIControlState.Normal)
+//        }
+//        //UINavigationBar.appearance().titleTextAttributes = [ NSFontAttributeName: customFont!]
+//        
+//        
+//        //UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+//        
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -439,6 +483,8 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let managedObjectContext:NSManagedObjectContext! = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         looksTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        //configureView()
         
         //self.tempAddRecords()
         
@@ -448,6 +494,12 @@ class ClosetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         looksArray = searchLooks()
         looksTableView.reloadData()
         
+        //var image = UIImage(named: "closet_navbar_background")
+        //self.navigationController!.navigationBar.setBackgroundImage(image, forBarMetrics: .Default)
+//        self.navigationController!.navigationBar.barTintColor = UIColor(red: 0.62, green: 0.81, blue: 0.78, alpha: 1.0)
+//        self.navigationController!.navigationBar.translucent = true
+        
+        //self.navigationController!.navigationBar.backgroundColor = UIColor(red: 0.65, green: 0.84, blue: 0.81, alpha: 1.0)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

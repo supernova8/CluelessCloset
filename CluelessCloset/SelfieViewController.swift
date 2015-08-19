@@ -45,6 +45,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     
     @IBOutlet var selfieTableView :UITableView!
     @IBOutlet var faveButton :UIBarButtonItem!
+     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     //MARK: - Core Methods
     
@@ -244,19 +245,66 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         return 0
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Photo"
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        if section == 0 {
+//            return "Photo"
+//        }
+//        if section == 1 {
+//            return "Info"
+//        }
+//        if section == 2 {
+//            return "Details"
+//        }
+//        return "Unknown"
+//    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let  headerCell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! SelfieHeaderCell
+        //headerCell.backgroundColor = UIColor.cyanColor()
+        
+        switch (section) {
+        case 0:
+            headerCell.headerLabel.text = "Photo"
+            println("Header Cell")
+            //return sectionHeaderView
+        case 1:
+            headerCell.headerLabel.text = "Info"
+            //return sectionHeaderView
+        case 2:
+            headerCell.headerLabel.text = "Details"
+            //return sectionHeaderView
+        default:
+            headerCell.headerLabel.text = "Other"
         }
-        if section == 1 {
-            return "Info"
-        }
-        if section == 2 {
-            return "Details"
-        }
-        return "Unknown"
+        
+        return headerCell
     }
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60;
+    }
+   
+    
+//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        var returnedView = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 20.0)) //set these values as necessary
+//        returnedView.backgroundColor = UIColor.brightTurqColor()
+//        
+//        var label = UILabel(frame: CGRectMake(8, 8, 12, 10))
+//        if section == 0 {
+//            label.text = "Photo"
+//        }
+//        if section == 1 {
+//            label.text = "Info"
+//        }
+//        if section == 2 {
+//            label.text =  "Details"
+//        }
+//
+//        //label.text = self.sectionHeaderTitleArray[section]
+//        returnedView.addSubview(label)
+//        
+//        return returnedView
+//    }
     
 
     
@@ -287,6 +335,12 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 //photoCell.saveToCameraRollButton.selected = false
                 photoCell.saveToCameraRollButton.hidden = false
                 photoCell.saveToCameraRollButton.enabled = false
+                photoCell.saveToCameraRollButton.backgroundColor = UIColor.selfieButtonOffColor()
+                
+                photoCell.shareButton.backgroundColor = UIColor.selfieButtonOffColor()
+                photoCell.shareButton.hidden = false
+                photoCell.shareButton.enabled = false
+                
                 //photoCell.saveToCameraRollLabel.textColor = UIColor.lightGrayColor()
                 //photoCell.saveToCameraRollView.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
                 
@@ -298,6 +352,12 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 println("Have Selfie? \(haveSelfie)")
                 photoCell.saveToCameraRollButton.hidden = false
                 photoCell.saveToCameraRollButton.enabled = true
+                photoCell.saveToCameraRollButton.backgroundColor = UIColor.selfieButtonColor()
+                
+                photoCell.shareButton.backgroundColor = UIColor.selfieButtonColor()
+                photoCell.shareButton.hidden = false
+                photoCell.shareButton.enabled = true
+                
 //                photoCell.saveToCameraRollSwitch.userInteractionEnabled = true
 //                photoCell.saveToCameraRollLabel.textColor = UIColor(red: 127/255, green: 188/255, blue: 163/255, alpha: 1)
 //                photoCell.saveToCameraRollView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
@@ -323,19 +383,19 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 textFieldCell.cellTextField.addTarget(self, action: "tableFieldChanged:", forControlEvents: UIControlEvents.EditingChanged)
                 textFieldCell.selectionStyle = UITableViewCellSelectionStyle.None
                 
-                if (haveSelfie == false) {
+//                if (haveSelfie == false) {
+//                    println("Have Selfie? \(haveSelfie)")
+//                textFieldCell.userInteractionEnabled = false
+//                textFieldCell.cellTextField.textColor = UIColor.lightGrayColor()
+//                textFieldCell.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
+//                textFieldCell.cellLabel.textColor = UIColor.lightGrayColor()
+//                } else {
                     println("Have Selfie? \(haveSelfie)")
-                textFieldCell.userInteractionEnabled = false
-                textFieldCell.cellTextField.textColor = UIColor.lightGrayColor()
-                textFieldCell.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 0.5)
-                textFieldCell.cellLabel.textColor = UIColor.lightGrayColor()
-                } else {
-                    println("Have Selfie? \(haveSelfie)")
-                    textFieldCell.userInteractionEnabled = true
-                    textFieldCell.cellTextField.textColor = UIColor.blackColor()
-                    textFieldCell.backgroundColor = UIColor.whiteColor()
-                    textFieldCell.cellLabel.textColor = UIColor.blackColor()
-                }
+                    //textFieldCell.userInteractionEnabled = true
+                    //textFieldCell.cellTextField.textColor = UIColor.blackColor()
+                    //textFieldCell.backgroundColor = UIColor.whiteColor()
+                    //textFieldCell.cellLabel.textColor = UIColor.blackColor()
+//                }
                 return textFieldCell
             case "labelCell":
                 var labelCell = tableView.dequeueReusableCellWithIdentifier("labelCell") as! LabelTableViewCell
@@ -836,7 +896,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             //return 350.0
             
             //let collectionViewWidth = selfieTableView.bounds.size.width
-            let collectionViewHeight = selfieTableView.bounds.size.height - 100.0
+            let collectionViewHeight = selfieTableView.bounds.size.height - 115.0
             return collectionViewHeight
             
         }
@@ -861,6 +921,27 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         return 44.0
     }
 
+//    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        
+//        // Background view is at index 0, content view at index 1
+//        if let bgView = view.subviews[0] as? UIView
+//        {
+//            // do your stuff
+//        }
+//        
+//        view.layer.borderColor = UIColor.magentaColor().CGColor
+//        view.layer.borderWidth = 1
+//    }
+//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        
+//        var myCustomView: UIImageView
+//        var myImage: UIImage = UIImage(named: "myImageResource")!
+//        myCustomView.image = myImage
+//        
+//        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+//        header.addSubview(myCustomView)
+//        return header
+//    }
     
     //MARK: - Interactivity Methods
     
@@ -1028,6 +1109,79 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         println("Fave Button Add")
     }
 
+    
+    @IBAction func shareButtonClicked(sender: UIButton)
+    {
+        var objectsToShare = [AnyObject]()
+        
+        
+        let textToShare = "Check out my Look No. \(newLook.lookNumber) in Clueless Closet! Tell me what you think!"
+            objectsToShare.append(textToShare)
+//        let picToShare = selfiePhoto
+            objectsToShare.append(selfiePhoto!)
+        let linkToShare = NSURL(string: "http://www.supernova8.com/")
+            objectsToShare.append(linkToShare!)
+        //objectsToShare = [textToShare,picToShare,lookNumberToShare]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            
+            //New Excluded Activities Code
+            activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll]
+            //activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,UIActivityTypeAirDrop,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePostToTencentWeibo,UIActivityTypePostToVimeo,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToWeibo]
+            
+            self.presentViewController(activityVC, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func saveToCameraRollButtonClicked(sender: UIButton)
+    {
+        var objectsToShare = [AnyObject]()
+        
+        objectsToShare.append(selfiePhoto!)
+        
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        
+        //New Excluded Activities Code
+        activityVC.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,UIActivityTypeAirDrop,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePostToTencentWeibo,UIActivityTypePostToVimeo,UIActivityTypePrint,UIActivityTypePostToWeibo,UIActivityTypeMessage,UIActivityTypeMail, UIActivityTypePostToFacebook,UIActivityTypePostToTwitter,UIActivityTypePostToFlickr]
+        //activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,UIActivityTypeAirDrop,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePostToTencentWeibo,UIActivityTypePostToVimeo,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToWeibo]
+        
+        //activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,UIActivityTypeAirDrop,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePostToTencentWeibo,UIActivityTypePostToVimeo,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToWeibo]
+        
+        self.presentViewController(activityVC, animated: true, completion: nil)
+        
+    }
+    
+    
+    //MARK: - Keyboard Handling
+    
+    func registerForKeyboardNotifications() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillChangeFrame:", name: UIKeyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func keyboardWillChangeFrame(aNotification: NSNotification) {
+        
+        let info = aNotification.userInfo!
+        println("Keyboard notified")
+        
+        var frameEnd = info[UIKeyboardFrameEndUserInfoKey]!.CGRectValue()
+        var convertedFrameEnd = self.view.convertRect(frameEnd, fromView: nil)
+        let heightOffset = self.view.bounds.size.height - convertedFrameEnd.origin.y
+        
+        var animationDurationValue = info[UIKeyboardAnimationDurationUserInfoKey] as! NSValue
+        var duration: NSTimeInterval = 0
+        animationDurationValue.getValue(&duration)
+        
+        self.bottomConstraint.constant = heightOffset
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            self.selfieTableView.layoutIfNeeded()
+        })
+        
+    }
+    
     //MARK: - Camera and Image Methods
     
     @IBAction func cameraButtonTapped(sender: AnyObject) {
@@ -1199,17 +1353,23 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 }
                 
             }
-            //scaleImage
-            UIImagePNGRepresentation(selfiePhoto).writeToFile(newImagePath, atomically: true)
+            //scaleImage -obj-C
+            //UIImage *scaledRotatedImage = [self scaleAndRotateImage:_dishImageView.image];
+            
+            let rotatedImage = scaleAndRotateImage(selfiePhoto!)
+            UIImagePNGRepresentation(rotatedImage).writeToFile(newImagePath as String, atomically: true)
+
+            
+            //UIImagePNGRepresentation(selfiePhoto).writeToFile(newImagePath, atomically: true)
             newLook.lookImageName = imageFileName
             //currentSettings.imageNameCounter = currentSettings.imageNameCounter.integerValue + 1
             
-            if (saveToCameraRoll == true) {
-                
-                UIImageWriteToSavedPhotosAlbum(selfiePhoto, nil, nil, nil)
-                println("Saved to Camera Roll")
-                
-            }
+//            if (saveToCameraRoll == true) {
+//                
+//                UIImageWriteToSavedPhotosAlbum(selfiePhoto, nil, nil, nil)
+//                println("Saved to Camera Roll")
+//                
+//            }
             appDelegate.saveContext()
             println("Save Image Add")
         }
@@ -1223,7 +1383,115 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
     }
     
+    func scaleAndRotateImage(image: UIImage) -> UIImage {
+        let kMaxResolution = 1280 as CGFloat
+        let imgRef = image.CGImage
+        
+        let width = CGFloat(CGImageGetWidth(imgRef))
+        let height = CGFloat(CGImageGetHeight(imgRef))
+        
+        var transform = CGAffineTransformIdentity
+        var bounds = CGRectMake(0.0, 0.0, width, height)
+        if width > kMaxResolution || height > kMaxResolution {
+            let ratio = width / height
+            if ratio > 1 {
+                bounds.size.width = kMaxResolution
+                bounds.size.height = CGFloat(bounds.size.width) / CGFloat(ratio)
+            } else {
+                bounds.size.height = kMaxResolution
+                bounds.size.width = CGFloat(bounds.size.height) * CGFloat(ratio)
+            }
+        }
+        
+        let scaleRatio = CGFloat(bounds.size.width) / CGFloat(width)
+        let imageSize = CGSizeMake(CGFloat(CGImageGetWidth(imgRef)), CGFloat(CGImageGetHeight(imgRef)))
+        var boundHeight :CGFloat!
+        let orient = image.imageOrientation
+        switch orient {
+        case .Up: //EXIF = 1
+            transform = CGAffineTransformIdentity;
+        case .UpMirrored: //EXIF = 2
+            transform = CGAffineTransformMakeTranslation(imageSize.width, 0.0);
+            transform = CGAffineTransformScale(transform, -1.0, 1.0);
+        case .Down: //EXIF = 3
+            transform = CGAffineTransformMakeTranslation(imageSize.width, imageSize.height);
+            transform = CGAffineTransformRotate(transform, CGFloat(M_PI));
+        case .DownMirrored: //EXIF = 4
+            transform = CGAffineTransformMakeTranslation(0.0, imageSize.height);
+            transform = CGAffineTransformScale(transform, 1.0, -1.0);
+        case .LeftMirrored: //EXIF = 5
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeTranslation(imageSize.height, imageSize.width);
+            transform = CGAffineTransformScale(transform, -1.0, 1.0);
+            transform = CGAffineTransformRotate(transform, 3.0 * CGFloat(M_PI) / 2.0);
+        case .Left: //EXIF = 6
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeTranslation(0.0, imageSize.width);
+            transform = CGAffineTransformRotate(transform, 3.0 * CGFloat(M_PI) / 2.0);
+        case .RightMirrored: //EXIF = 7
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeScale(-1.0, 1.0);
+            transform = CGAffineTransformRotate(transform, CGFloat(M_PI) / 2.0);
+        case .Right: //EXIF = 8
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeTranslation(imageSize.height, 0.0);
+            transform = CGAffineTransformRotate(transform, CGFloat(M_PI) / 2.0);
+        default:
+            NSException(name: "Inavlid Orientation", reason: "Invalid Image orientation", userInfo: nil)
+        }
+        
+        UIGraphicsBeginImageContext(bounds.size);
+        
+        let context = UIGraphicsGetCurrentContext();
+        
+        if (orient == UIImageOrientation.Right || orient == UIImageOrientation.Left) {
+            CGContextScaleCTM(context, -scaleRatio, scaleRatio);
+            CGContextTranslateCTM(context, -height, 0);
+        }
+        else {
+            CGContextScaleCTM(context, scaleRatio, -scaleRatio);
+            CGContextTranslateCTM(context, 0, -height);
+        }
+        
+        CGContextConcatCTM(context, transform);
+        
+        CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, width, height), imgRef);
+        let imageCopy = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return imageCopy;
+    }
+    //MARK: - View
     
+//    func configureView() {
+//        
+//        // Change the font and size of nav bar text
+//        if let navBarFont = UIFont(name: "KG Manhattan Script", size: 32.0) {
+//            println("Carosel font")
+//            let navBarAttributesDictionary: [NSObject: AnyObject]? = [
+//                NSForegroundColorAttributeName: UIColor.brightPinkColor(),
+//                NSFontAttributeName: navBarFont
+//            ]
+//            
+//            navigationController?.navigationBar.titleTextAttributes = navBarAttributesDictionary
+//            //UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: "Budmo"], forState: UIControlState.Normal)
+//            //shuffleBarButtonItem.setTitleTextAttributes([ NSFontAttributeName: UIFont(name: "Didot", size: 26)!], forState: UIControlState.Normal)
+//        }
+//        //UINavigationBar.appearance().titleTextAttributes = [ NSFontAttributeName: customFont!]
+//        
+//        
+//        //UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+//        
+//    }
+
     
     //MARK: - Life Cycle Methods
 
@@ -1231,8 +1499,11 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         super.viewDidLoad()
         
          selfieTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+         registerForKeyboardNotifications()
         
+        //create New Closet and Settings Numbers
         //createClosetAndSettings()
+        //configureView()
         
            }
     override func viewWillAppear(animated: Bool) {
@@ -1343,9 +1614,11 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         //looksArray = fetchLooks("")
         selfieTableView.reloadData()
         
-
-      
-        
+        //self.navigationController!.navigationBar.barTintColor = UIColor(red: 0.62, green: 0.81, blue: 0.78, alpha: 0.2)
+        //self.navigationController!.navigationBar.translucent = true
+//      var image = UIImage(named: "navbar_back2")
+//        self.navigationController!.navigationBar.setBackgroundImage(image,
+//            forBarMetrics: .Default)
     }
     
     override func viewWillDisappear(animated: Bool) {

@@ -14,6 +14,7 @@ class PhotoTableViewCell: UITableViewCell {
     @IBOutlet var galleryButton             :UIButton!
     @IBOutlet var cameraButton              :UIButton!
     @IBOutlet var deleteButton              :UIButton!
+    @IBOutlet var shareButton               :UIButton!
     @IBOutlet var saveToCameraRollButton    :UIButton!
     //@IBOutlet var saveToCameraRollSwitch    :UISwitch!
     //@IBOutlet var saveToCameraRollLabel     :UILabel!

@@ -17,7 +17,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     //var looksArray = [Looks]()
     var lookDatesArray = [LookDates]()
-    //var deleteLookIndexPath: NSIndexPath? = nil
+    var deleteDateIndexPath: NSIndexPath? = nil
     //var lookToFaveIndexPath: NSIndexPath? = nil
     
     //@IBOutlet var lookSearchBar :UISearchBar!
@@ -76,6 +76,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         let cal = NSCalendar.currentCalendar()
         let searchDateEnd = cal.dateByAddingComponents(components, toDate: searchDate, options: nil)
         let fetchRequest :NSFetchRequest = NSFetchRequest(entityName: "LookDates")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "dateWorn", ascending: true)]
         let predicate = NSPredicate(format: "%@ <= dateWorn and dateWorn <= %@", searchDate, searchDateEnd!)
         fetchRequest.predicate = predicate
         return managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as! [LookDates]
@@ -182,7 +183,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         cell.occasionLabel!.text = "\(currentLookDate.dateOccasion)"
         
         
-        let dateWornSet = currentLook.relationshipLookLookDates
+        //let dateWornSet = currentLook.relationshipLookLookDates
 //        var sortDescriptor = NSSortDescriptor(key: "dateWorn", ascending: false)
 //        var dateWornSortedArray = dateWornSet.sortedArrayUsingDescriptors([sortDescriptor])
 //        
@@ -191,12 +192,12 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         
         //lastWornDateLabel.text = "\(formatter.stringFromDate(lastLookDate.dateWorn))"
-        var timesWorn = "\(dateWornSet.count)"
+        //var timesWorn = "\(dateWornSet.count)"
         
         
         
         
-        cell.timesWornLabel!.text = "Times Worn: \(timesWorn)"
+        //cell.timesWornLabel!.text = "Times Worn: \(timesWorn)"
         
         if currentLook.lookFave == true {
             //cell.faveImageView!.image = UIImage(named: "pink-heart-full")
@@ -212,7 +213,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         
 
-        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         
         return cell
@@ -240,7 +241,170 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         performSegueWithIdentifier("editFromDateToDetailSegue", sender: self)
         
     }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        return 90.0
+    }
+
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        let deleteAction = UITableViewRowAction(style: .Normal, title: "UnWear") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+            println("Delete")
+            //dial the phone code
+            
+            self.deleteDateIndexPath = indexPath
+            let dateToDelete = self.lookDatesArray[indexPath.row]
+            let lookToDelete = dateToDelete.relationshipLookDateLook
+            
+            let dateWornSet = lookToDelete.relationshipLookLookDates
+            
+            var timesWorn = dateWornSet.count
+            
+            if timesWorn <= 1 {
+                self.cantDelete("Look No. \(lookToDelete.lookNumber)")
+            } else {
+            
+            self.confirmDelete("Look No. \(lookToDelete.lookNumber)")
+            }
+        }
+        
+        deleteAction.backgroundColor = UIColor.brightPinkColor()
+        
+        
+        //        let faveAction = UITableViewRowAction(style: .Normal, title: "Fave") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+        //            println("Fave")
+        //
+        //
+        //            self.lookToFaveIndexPath = indexPath
+        //            self.lookToFave()
+        //
+        //
+        //            let lookToFave = self.looksArray[indexPath.row]
+        //
+        //            if lookToFave.lookFave == false {
+        //                lookToFave.lookFave = true
+        //             } else if lookToFave.lookFave == true {
+        //                lookToFave.lookFave = false
+        //             }
+        //
+        //            self.appDelegate.saveContext()
+        //            self.looksTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+        //
+        //        }
+        //        faveAction.backgroundColor = UIColor(red: 255/255, green: 67/255, blue: 242/255, alpha: 1)
+        
+        
+        //return [deleteAction, faveAction]
+        
+        return [deleteAction]
+        
+        
+    }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+    }
+    // Delete Confirmation and Handling
+    func cantDelete(look: String) {
+        let alert = UIAlertController(title: "Delete Look", message: "\(look) only has one date. This will Delete it from your Closet?", preferredStyle: .ActionSheet)
+        
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteLook)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDeleteLook)
+        
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
+    // Delete Confirmation and Handling
+    func confirmDelete(look: String) {
+        let alert = UIAlertController(title: "Delete Date", message: "Are you sure you want to Delete \(look) from this date?", preferredStyle: .ActionSheet)
+        
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteLookDate)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDeleteLook)
+        
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func handleDeleteLookDate(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deleteDateIndexPath {
+            
+            //            managedObjectContext.deleteObject(looksArray[indexPath.row])
+            //            appDelegate.saveContext()
+            //            looksTableView.reloadData()
+            //
+            
+            looksTableView.beginUpdates()
+            
+            managedObjectContext.deleteObject(lookDatesArray[indexPath.row])
+            
+            lookDatesArray.removeAtIndex(indexPath.row)
+            
+            // Note that indexPath is wrapped in an array:  [indexPath]
+            looksTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            
+            deleteDateIndexPath = nil
+            appDelegate.saveContext()
+            looksTableView.endUpdates()
+        }
+    }
+    func handleDeleteLook(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deleteDateIndexPath {
+            
+            //            managedObjectContext.deleteObject(looksArray[indexPath.row])
+            //            appDelegate.saveContext()
+            //            looksTableView.reloadData()
+            //
+            
+            looksTableView.beginUpdates()
+            
+            let dateToDelete = lookDatesArray[indexPath.row]
+            let lookToDelete = dateToDelete.relationshipLookDateLook
+            managedObjectContext.deleteObject(lookToDelete)
+            
+            lookDatesArray.removeAtIndex(indexPath.row)
+            
+            // Note that indexPath is wrapped in an array:  [indexPath]
+            looksTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            
+            deleteDateIndexPath = nil
+            appDelegate.saveContext()
+            looksTableView.endUpdates()
+        }
+    }
+
+    func cancelDeleteLook(alertAction: UIAlertAction!) {
+        deleteDateIndexPath = nil
+    }
+    
+
+    func colorForIndex(index: Int) -> UIColor {
+        let itemCount = lookDatesArray.count - 1
+        let color = (CGFloat(index + 3) / CGFloat(itemCount)) * 0.6
+        let color2 = (CGFloat(index) / CGFloat(itemCount)) * 0.95
+        return UIColor(red: 0.23, green: color, blue: 0.95, alpha: 1.0)
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
+        forRowAtIndexPath indexPath: NSIndexPath) {
+            //cell.backgroundColor = colorForIndex(indexPath.row)
+            if(indexPath.row % 2 == 0) {
+            //cell.backgroundColor = UIColor(red: 0.73, green: 0.93, blue: 0.91, alpha: 0.9)
+                cell.backgroundColor = UIColor(red: 0.87, green: 0.96, blue: 0.91, alpha: 0.9)
+
+            }
+            else {
+            //cell.backgroundColor = UIColor(red: 0.87, green: 0.96, blue: 0.91, alpha: 0.9)
+                cell.backgroundColor = UIColor(red: 0.73, green: 0.93, blue: 0.91, alpha: 0.9)
+
+            }
+            
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var destController = segue.destinationViewController as! SelfieViewController
         
@@ -268,6 +432,41 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
     }
 
+//    func configureView() {
+//        
+//        // Change the font and size of nav bar text
+//        if let navBarFont = UIFont(name: "Budmo", size: 30.0) {
+//            println("Carosel font")
+//            let navBarAttributesDictionary: [NSObject: AnyObject]? = [
+//                NSForegroundColorAttributeName: UIColor.brightPinkColor(),
+//                NSFontAttributeName: navBarFont
+//            ]
+//            
+//            navigationController?.navigationBar.titleTextAttributes = navBarAttributesDictionary
+//            //UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: "Budmo"], forState: UIControlState.Normal)
+//            //shuffleBarButtonItem.setTitleTextAttributes([ NSFontAttributeName: UIFont(name: "Didot", size: 26)!], forState: UIControlState.Normal)
+//        }
+//        
+//        //self.navigationController!.navigationBar.barTintColor = UIColor(red: 0.62, green: 0.81, blue: 0.78, alpha: 1.0)
+//        //self.navigationController!.navigationBar.translucent = true
+//        
+//        //UINavigationBar.appearance().titleTextAttributes = [ NSFontAttributeName: customFont!]
+//        
+//        
+//        //UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+//        
+//    }
+    
+//    @IBAction private func editButtonPressed(sender: UIBarButtonItem!) {
+//        if looksTableView.editing {
+//            looksTableView.setEditing(false, animated: true)
+//            editBarButtonItem.title = "Edit"
+//        } else {
+//            looksTableView.setEditing(true, animated: true)
+//            editBarButtonItem.title = "Done"
+//        }
+//    }
+    
     //MARK: - LifeCycle Methods
     
     override func viewDidLoad() {
@@ -279,11 +478,22 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         looksTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
         
-        lookCalendar.appearance.weekdayTextColor = UIColor(red: 238/255, green: 139/255, blue: 139/255, alpha: 1)
-        lookCalendar.appearance.headerTitleColor = UIColor(red: 255/255, green: 67/255, blue: 42/255, alpha: 1)
-        lookCalendar.appearance.eventColor =  UIColor(red: 255/255, green: 122/255, blue: 104/255, alpha: 1)
-        lookCalendar.appearance.selectionColor =  UIColor(red: 244/255, green: 197/255, blue: 76/255, alpha: 1)
-        lookCalendar.appearance.todayColor =  UIColor(red: 238/255, green: 139/255, blue: 139/255, alpha: 1)
+        lookCalendar.appearance.weekdayTextColor = UIColor.turquioseColor()
+        lookCalendar.appearance.weekdayFont = UIFont(name: "BebasNeueBold", size: 30.0)
+        lookCalendar.appearance.headerTitleColor = UIColor.tealColor()
+        lookCalendar.appearance.headerTitleFont = UIFont(name: "BebasNeueBold", size: 30.0)
+        
+        lookCalendar.appearance.eventColor =  UIColor.brightPinkColor()
+        lookCalendar.appearance.selectionColor =  UIColor.turquioseColor()
+        lookCalendar.appearance.todayColor =  UIColor.sunFlowerColor()
+        
+        lookCalendar.appearance.titleFont = UIFont(name: "BebasNeueBold", size: 30.0)
+        
+        
+//          lookCalendar.appearance.weekdayTextColor = UIColor(red: 238/255, green: 139/255, blue: 139/255, alpha: 1)
+//        lookCalendar.appearance.eventColor =  UIColor(red: 255/255, green: 122/255, blue: 104/255, alpha: 1)
+//        lookCalendar.appearance.selectionColor =  UIColor(red: 244/255, green: 197/255, blue: 76/255, alpha: 1)
+//        lookCalendar.appearance.todayColor =  UIColor(red: 238/255, green: 139/255, blue: 139/255, alpha: 1)
 
  
        var todayDate = NSDate()
@@ -292,6 +502,8 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
 //        
         
         calendar(lookCalendar, didSelectDate: todayDate)
+        
+        //configureView()
         
         
         

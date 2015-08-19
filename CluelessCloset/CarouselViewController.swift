@@ -206,7 +206,9 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         
         //looksTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         
+        //go to Calendar
         
+        tabBarController?.selectedIndex = 1
     }
 
     
@@ -277,27 +279,47 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//       performSegueWithIdentifier("editToDetailSegue", sender: self)
+       performSegueWithIdentifier("editToDetailSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        var destController = segue.destinationViewController as! SelfieViewController
-//        
-//        //var x = 1 as Float // same as this
-//        if segue.identifier == "editToDetailSegue" {
-//            
-//            let indexPath = looksCollectionView.indexPathsForSelectedItems()[0] as! NSIndexPath
-//            let currentLook = looksArray[indexPath.row]
-//            destController.selectedLook = currentLook
-//            looksCollectionView.deselectItemAtIndexPath(indexPath, animated: true)
-//            
-//        }
-//        
-//            if segue.identifier == "addToDetailSegue" {
-//            destController.selectedLook = nil
-//            
-//        }
+        var destController = segue.destinationViewController as! SelfieViewController
+        
+        //var x = 1 as Float // same as this
+        if segue.identifier == "editToDetailSegue" {
+            
+            let indexPath = looksCollectionView.indexPathsForSelectedItems()[0] as! NSIndexPath
+            let currentLook = looksArray[indexPath.row]
+            destController.selectedLook = currentLook
+            looksCollectionView.deselectItemAtIndexPath(indexPath, animated: true)
+            
+        }
+        
+            if segue.identifier == "addToDetailSegue" {
+            destController.selectedLook = nil
+            
+        }
 
+    }
+    func configureView() {
+        
+        // Change the font and size of nav bar text
+        if let navBarFont = UIFont(name: "Budmo", size: 30.0) {
+            println("Carosel font")
+            let navBarAttributesDictionary: [NSObject: AnyObject]? = [
+                NSForegroundColorAttributeName: UIColor.brightPinkColor(),
+                NSFontAttributeName: navBarFont
+            ]
+            println("Carosel font2")
+            navigationController?.navigationBar.titleTextAttributes = navBarAttributesDictionary
+            //UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: "Budmo"], forState: UIControlState.Normal)
+            shuffleBarButtonItem.setTitleTextAttributes([ NSFontAttributeName: UIFont(name: "Didot", size: 26)!], forState: UIControlState.Normal)
+        }
+        //UINavigationBar.appearance().titleTextAttributes = [ NSFontAttributeName: customFont!]
+        
+        
+        //UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
+        
     }
 
     override func viewDidLoad() {
@@ -307,14 +329,22 @@ class CarouselViewController: UIViewController, UICollectionViewDataSource, UICo
         let managedObjectContext:NSManagedObjectContext! = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         //looksCollectionView.registerClass(UICollectionViewCell.self, forCellReuseIdentifier: "cell")
+            //configureView()
+        
     }
-
-    override func viewWillAppear(animated: Bool) {
+    
+        override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         looksArray = fetchLooks()
         looksCollectionView.reloadData()
 
-        
+//            var image = UIImage(named: "navbar_back")
+//            self.navigationController!.navigationBar.setBackgroundImage(image,
+//                forBarMetrics: .Default)
+//            self.navigationController!.navigationBar.barTintColor = UIColor(red: 0.65, green: 0.84, blue: 0.81, alpha: 0.2)
+//            self.navigationController!.navigationBar.translucent = true
+    
+            configureView()
     }
     
     override func didReceiveMemoryWarning() {

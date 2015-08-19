@@ -16,7 +16,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        
+        //UINavigationBar.appearance().barTintColor = UIColor(red: 234.0/255.0, green: 46.0/255.0, blue: 73.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().barTintColor = UIColor.blackColor()
+        UINavigationBar.appearance().translucent = true
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        if let navBarFont = UIFont(name: "KG Manhattan Script", size: 30.0) {
+            println("Carosel font")
+            let navBarAttributesDictionary: [NSObject: AnyObject]? = [
+                NSForegroundColorAttributeName: UIColor.brightPinkColor(),
+                NSFontAttributeName: navBarFont
+            ]
+            println("Carosel font2")
+            UINavigationBar.appearance().titleTextAttributes = navBarAttributesDictionary
+        }
+//                  1UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.brightPinkColor(), NSFontAttributeName : UIFont(name: "Budmo", size: 30.0)]
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.brightPinkColor()], forState: .Selected)
+        
+        UITabBar.appearance().tintColor = UIColor.brightPinkColor()
+        
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
+        
+        var attr = NSDictionary(object: UIFont(name: "HelveticaNeue-Bold", size: 16.0)!, forKey: NSFontAttributeName)
+        UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject], forState: .Normal)
+        
+        
+//        var addStatusBar = UIView()
+//        addStatusBar.frame = CGRectMake(0, 0, 375, 20);
+//        addStatusBar.backgroundColor = UIColor.brightPinkColor()
+//        self.window?.rootViewController?.view .addSubview(addStatusBar)
+        
+        
         return true
     }
     
