@@ -4,6 +4,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Marvel-Bold.ttf">
+            <string>Marvel-Bold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -11,42 +16,29 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="bIK-Qh-SFI">
-                    <rect key="frame" x="20" y="8" width="441" height="458"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clueless_closet_launch" translatesAutoresizingMaskIntoConstraints="NO" id="bIK-Qh-SFI">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 supernova8productions. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="  Copyright (c) 2015 supernova8 productions. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                    <rect key="frame" x="20" y="437" width="441" height="23"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="Bjt-Af-iIz"/>
+                        <constraint firstAttribute="height" constant="23" id="Bjt-Af-iIz"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="19"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Marvel-Bold" family="Marvel" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="-1" height="-1"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CluelessCloset" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="20" y="60" width="441" height="43"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="43" id="2hb-DX-V2F"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="40"/>
-                    <color key="textColor" red="1" green="0.71263001818370153" blue="0.85729449413336034" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="2" height="2"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="0.21568627450980393" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="bIK-Qh-SFI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0Cj-i2-E2G"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="0Kz-aI-o6k"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" id="7Fw-1h-Jml"/>
                 <constraint firstItem="bIK-Qh-SFI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="7eh-Ah-bTc"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="kId-c2-rCX" secondAttribute="leading" id="9lu-TJ-w2c"/>
-                <constraint firstAttribute="bottom" secondItem="bIK-Qh-SFI" secondAttribute="bottom" constant="14" id="IUh-Xk-9cB"/>
-                <constraint firstItem="bIK-Qh-SFI" firstAttribute="leading" secondItem="kId-c2-rCX" secondAttribute="leading" id="L3N-Xx-RZJ"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="T49-rP-yZS"/>
-                <constraint firstItem="bIK-Qh-SFI" firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" id="ZyS-bA-nx5"/>
-                <constraint firstItem="bIK-Qh-SFI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="gXl-DH-oM5"/>
+                <constraint firstAttribute="bottom" secondItem="bIK-Qh-SFI" secondAttribute="bottom" id="IUh-Xk-9cB"/>
+                <constraint firstItem="bIK-Qh-SFI" firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="19" id="ZyS-bA-nx5"/>
+                <constraint firstAttribute="trailing" secondItem="bIK-Qh-SFI" secondAttribute="trailing" id="fSU-jB-53X"/>
+                <constraint firstItem="bIK-Qh-SFI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gXl-DH-oM5"/>
                 <constraint firstItem="bIK-Qh-SFI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="iJq-i6-Y6U"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -55,6 +47,6 @@
         </view>
     </objects>
     <resources>
-        <image name="iTunesArtwork" width="512" height="512"/>
+        <image name="clueless_closet_launch" width="375" height="667"/>
     </resources>
 </document>

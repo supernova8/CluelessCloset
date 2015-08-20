@@ -13,7 +13,7 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.selectedIndex = 2;
+        //self.selectedIndex = 2;
         
         // Do any additional setup after loading the view.
     }

@@ -908,7 +908,7 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         }
         if indexPath.section == 2 {
             if detailFieldTypeArray[indexPath.row] == "textViewCell" {
-                return 150.0
+                return 250.0
             } else if detailFieldTypeArray[indexPath.row] == "buttonCell" {
                 return 75.0
             } else if detailFieldTypeArray[indexPath.row] == "dblSegControlCell" {

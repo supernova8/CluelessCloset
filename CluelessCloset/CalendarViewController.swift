@@ -247,7 +247,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
 
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        let deleteAction = UITableViewRowAction(style: .Normal, title: "UnWear") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+        let deleteAction = UITableViewRowAction(style: .Normal, title: "UnDress") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             println("Delete")
             //dial the phone code
             
