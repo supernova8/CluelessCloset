@@ -1295,10 +1295,72 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     }
     
         func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+            
+//            UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//            //    // Resize the image from the camera
+//            UIImage *scaledImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(560.0, 560.0) interpolationQuality:kCGInterpolationHigh];
+//            //    // Crop the image to a square (yikes, fancy!)
+//            UIImage *croppedImage = [scaledImage croppedImage:CGRectMake((scaledImage.size.width - 560.0)/2, (scaledImage.size.height - 560)/2, 560.0, 560.0)];
+//            //    // Show the photo on the screen
+//            //    photo.image = croppedImage;
+//            //    [picker dismissModalViewControllerAnimated:NO];
+//            
+//            _dishImageView.image = croppedImage;
+//            
+//            [picker dismissViewControllerAnimated:true completion:nil];
+            
+            
+            
+            
+//            // Obj-C
+//            // Method signature
+//            — (UIImage *)resizedImageWithContentMode:(UIViewContentMode)contentMode
+//            bounds: (CGSize)bounds
+//            interpolationQuality: (CGInterpolationQuality)quality
+//            { ... }
+//            // Method call
+//            [UIImage resizedImageWithContentMode: UIViewContentModeAspectFill
+//                bounds: CGSizeMake(size1, size2)
+//                interpolationQuality: quality];
+//            // Swift
+//            // Method signature
+//            func resizedImage(contentMode: UIViewContentMode,
+//                bounds: CGSize,
+//                interpolationQuality quality: CGInterpolationQuality
+//                ) -> UIImage { ... }
+//            // Method call
+//            UIImage.resizedImage(.AspectFill, 
+//                bounds: CGSizeMake(size1, size2),
+//                interpolationQuality: quality
+//            )
+            
+            
+            
+            
+            
+            
             if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
                 //selfiePhoto.contentMode = .ScaleAspectFit
                 println("Picked An image")
-                selfiePhoto = pickedImage
+                //let orientedImage = UIImage(CGImage: pickedImage.CGImage, scale: 1, orientation: pickedImage.imageOrientation)!
+//                var scaledImage = pickedImage.resizedImage(.AspectFill, bounds:CGSizeMake(560.0, 560.0), interpolationQuality: kCGInterpolationHigh
+                
+                //let rotatedImage = scaleAndRotateImage(scaledImage)
+                
+                
+                var mainScreenSize : CGSize = UIScreen.mainScreen().bounds.size // Getting main screen size of iPhone
+                //var imageSize = CGSizeMake(mainScreenSize.width, mainScreenSize.height)
+                 var imageSized = CGSizeMake(mainScreenSize.width, mainScreenSize.height)
+                var imageObbj:UIImage! = imageResize(pickedImage, sizeChange: imageSized)
+                
+                
+                //self.view.backgroundColor = UIColor(patternImage:imageObbj)
+                
+                
+                
+                
+                
+                selfiePhoto = imageObbj
                 haveSelfie = true
                 
                 if newLook == nil {
@@ -1337,10 +1399,20 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         var fileManager = NSFileManager.defaultManager()
         var error:NSErrorPointer = NSErrorPointer()
         
-        var imageFileName = "image\(newLookImageNumber).png"
+        
+        var imageFileName = ""
+        
+        if newLookImageNumber == 0 {
+            
+            imageFileName = newLook.lookImageName
+            println("Changing Pic: \(imageFileName)")
+            
+        } else {
+            imageFileName = "image\(newLookImageNumber).png"
+            println("New Pic: \(imageFileName)")
+        }
         
         var newImagePath = getDocumentPathForFile(imageFileName)
-        
         println("Document Path and Name: \(newImagePath)")
         
         if ((selfiePhoto) != nil) {
@@ -1469,6 +1541,20 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         return imageCopy;
     }
+    
+    
+    func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
+        
+        let hasAlpha = false
+        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        imageObj.drawInRect(CGRect(origin: CGPointZero, size: sizeChange))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage
+    }
+    
     //MARK: - View
     
 //    func configureView() {
@@ -1606,7 +1692,9 @@ class SelfieViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 println("New Look is Nil, Disable FAve Button")
                   faveButton.enabled = false
                 selfiePhoto = nil
-//                self.title = "New Look"
+                haveSelfie = false
+                selfiePhoto = UIImage(named: "aqua-crown")
+                //self.title = "New Look"
             }
           
         }

@@ -36,14 +36,10 @@
 		2D976C381B84512E00051514 /* SelfieHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D976C371B84512E00051514 /* SelfieHeaderCell.swift */; };
 		2D976C3A1B848D6400051514 /* HoneyScript-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C391B848D6400051514 /* HoneyScript-SemiBold.ttf */; };
 		2D976C3C1B848D7900051514 /* HoneyScript-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C3B1B848D7900051514 /* HoneyScript-Light.ttf */; };
-		2D976C5A1B849B0400051514 /* clingy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C591B849B0400051514 /* clingy.ttf */; };
-		2D976C5C1B849B1F00051514 /* GreatVibes-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C5B1B849B1F00051514 /* GreatVibes-Regular.otf */; };
 		2D976C5E1B849B3800051514 /* KGManhattanScript.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C5D1B849B3800051514 /* KGManhattanScript.ttf */; };
 		2D976C601B84E69A00051514 /* SelfieLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D976C5F1B84E69A00051514 /* SelfieLabel.swift */; };
 		2D976C7D1B85146B00051514 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C611B85146B00051514 /* Oswald-Bold.ttf */; };
 		2D976C7E1B85146B00051514 /* Oswald-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C621B85146B00051514 /* Oswald-BoldItalic.ttf */; };
-		2D976C7F1B85146B00051514 /* Oswald-Demi-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C631B85146B00051514 /* Oswald-Demi-BoldItalic.ttf */; };
-		2D976C801B85146B00051514 /* Oswald-DemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C641B85146B00051514 /* Oswald-DemiBold.ttf */; };
 		2D976C811B85146B00051514 /* Oswald-Extra-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C651B85146B00051514 /* Oswald-Extra-LightItalic.ttf */; };
 		2D976C821B85146B00051514 /* Oswald-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C661B85146B00051514 /* Oswald-ExtraLight.ttf */; };
 		2D976C831B85146B00051514 /* Oswald-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C671B85146B00051514 /* Oswald-Heavy.ttf */; };
@@ -54,47 +50,22 @@
 		2D976C881B85146B00051514 /* Oswald-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C6C1B85146B00051514 /* Oswald-MediumItalic.ttf */; };
 		2D976C891B85146B00051514 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C6D1B85146B00051514 /* Oswald-Regular.ttf */; };
 		2D976C8A1B85146B00051514 /* Oswald-RegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C6E1B85146B00051514 /* Oswald-RegularItalic.ttf */; };
-		2D976C8C1B85146B00051514 /* Marvel-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C701B85146B00051514 /* Marvel-Bold.ttf */; };
-		2D976C8D1B85146B00051514 /* Marvel-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C711B85146B00051514 /* Marvel-BoldItalic.ttf */; };
-		2D976C8E1B85146B00051514 /* Marvel-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C721B85146B00051514 /* Marvel-Italic.ttf */; };
-		2D976C8F1B85146B00051514 /* Marvel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C731B85146B00051514 /* Marvel-Regular.ttf */; };
-		2D976C901B85146B00051514 /* VarickaLC.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C741B85146B00051514 /* VarickaLC.otf */; };
-		2D976C911B85146B00051514 /* VarickaLC.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C751B85146B00051514 /* VarickaLC.ttf */; };
-		2D976C921B85146B00051514 /* VarickaSC.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C761B85146B00051514 /* VarickaSC.otf */; };
-		2D976C931B85146B00051514 /* VarickaSC.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C771B85146B00051514 /* VarickaSC.ttf */; };
-		2D976C941B85146B00051514 /* Movies.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C781B85146B00051514 /* Movies.ttf */; };
-		2D976C951B85146B00051514 /* Montepetrum bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C791B85146B00051514 /* Montepetrum bold.ttf */; };
-		2D976C961B85146B00051514 /* Montepetrum regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C7A1B85146B00051514 /* Montepetrum regular.ttf */; };
-		2D976C971B85146B00051514 /* Montepetrum Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C7B1B85146B00051514 /* Montepetrum Thin.ttf */; };
-		2D976C981B85146B00051514 /* Munich.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D976C7C1B85146B00051514 /* Munich.ttf */; };
 		2DF6C0B41B7D0C3B0042AC87 /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0B31B7D0C3B0042AC87 /* CarouselCollectionViewCell.swift */; };
 		2DF6C0B61B7D0D4E0042AC87 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0B51B7D0D4E0042AC87 /* CarouselViewController.swift */; };
 		2DF6C0B91B7EB3BB0042AC87 /* CalendarLookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0B81B7EB3BB0042AC87 /* CalendarLookTableViewCell.swift */; };
 		2DF6C0BB1B7F32220042AC87 /* Carousel2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0BA1B7F32220042AC87 /* Carousel2ViewController.swift */; };
-		2DF6C0BD1B7F3E600042AC87 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0BC1B7F3E600042AC87 /* Pacifico.ttf */; };
 		2DF6C0C31B7F46000042AC87 /* MyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0C21B7F46000042AC87 /* MyLabel.swift */; };
 		2DF6C0C51B7F5C450042AC87 /* SelfieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0C41B7F5C450042AC87 /* SelfieButton.swift */; };
 		2DF6C0C91B7F5E970042AC87 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0C61B7F5E960042AC87 /* Extensions.swift */; };
 		2DF6C0CA1B7F5E970042AC87 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0C71B7F5E970042AC87 /* Paths.swift */; };
 		2DF6C0CB1B7F5E970042AC87 /* StarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0C81B7F5E970042AC87 /* StarButton.swift */; };
 		2DF6C0CE1B7F77BD0042AC87 /* SelfieButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0CD1B7F77BD0042AC87 /* SelfieButtonView.swift */; };
-		2DF6C0D01B7FEE500042AC87 /* AbrahamLincoln.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0CF1B7FEE500042AC87 /* AbrahamLincoln.ttf */; };
-		2DF6C0D71B7FF4320042AC87 /* BEBAS___.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0D11B7FF4320042AC87 /* BEBAS___.ttf */; };
 		2DF6C0D81B7FF4320042AC87 /* BebasNeue Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0D21B7FF4320042AC87 /* BebasNeue Bold.ttf */; };
 		2DF6C0D91B7FF4320042AC87 /* BebasNeue Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0D31B7FF4320042AC87 /* BebasNeue Book.ttf */; };
 		2DF6C0DA1B7FF4320042AC87 /* BebasNeue Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0D41B7FF4320042AC87 /* BebasNeue Light.ttf */; };
 		2DF6C0DB1B7FF4320042AC87 /* BebasNeue Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0D51B7FF4320042AC87 /* BebasNeue Regular.ttf */; };
 		2DF6C0DC1B7FF4320042AC87 /* BebasNeue Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0D61B7FF4320042AC87 /* BebasNeue Thin.ttf */; };
-		2DF6C0E61B7FF4710042AC87 /* Big Surprise.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0DD1B7FF4710042AC87 /* Big Surprise.ttf */; };
-		2DF6C0E71B7FF4710042AC87 /* black_jack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0DE1B7FF4710042AC87 /* black_jack.ttf */; };
 		2DF6C0E81B7FF4710042AC87 /* budmo jiggler.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0DF1B7FF4710042AC87 /* budmo jiggler.ttf */; };
-		2DF6C0EA1B7FF4710042AC87 /* daisy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0E11B7FF4710042AC87 /* daisy.ttf */; };
-		2DF6C0EC1B7FF4710042AC87 /* Demo_Delinquente_altI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0E31B7FF4710042AC87 /* Demo_Delinquente_altI.ttf */; };
-		2DF6C0EE1B7FF4710042AC87 /* gnuolane rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0E51B7FF4710042AC87 /* gnuolane rg.ttf */; };
-		2DF6C0F51B7FF4B70042AC87 /* goudy_bookletter_1911-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0EF1B7FF4B70042AC87 /* goudy_bookletter_1911-webfont.ttf */; };
-		2DF6C0F61B7FF4B70042AC87 /* HaloHandletter.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0F01B7FF4B70042AC87 /* HaloHandletter.ttf */; };
-		2DF6C0F91B7FF4B70042AC87 /* MarketingScript.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0F31B7FF4B70042AC87 /* MarketingScript.ttf */; };
-		2DF6C0FA1B7FF4B70042AC87 /* PR8 Charade.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6C0F41B7FF4B70042AC87 /* PR8 Charade.ttf */; };
 		2DF6C0FD1B801B2F0042AC87 /* UIColor+Flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0FC1B801B2F0042AC87 /* UIColor+Flat.swift */; };
 		2DF6C0FF1B801B730042AC87 /* UIColor+Girly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6C0FE1B801B730042AC87 /* UIColor+Girly.swift */; };
 		35C765E06C81351133F5391C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF357025539958C742FAEE1E /* libPods.a */; };
@@ -145,14 +116,10 @@
 		2D976C371B84512E00051514 /* SelfieHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfieHeaderCell.swift; sourceTree = "<group>"; };
 		2D976C391B848D6400051514 /* HoneyScript-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HoneyScript-SemiBold.ttf"; sourceTree = "<group>"; };
 		2D976C3B1B848D7900051514 /* HoneyScript-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HoneyScript-Light.ttf"; sourceTree = "<group>"; };
-		2D976C591B849B0400051514 /* clingy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = clingy.ttf; sourceTree = "<group>"; };
-		2D976C5B1B849B1F00051514 /* GreatVibes-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GreatVibes-Regular.otf"; sourceTree = "<group>"; };
 		2D976C5D1B849B3800051514 /* KGManhattanScript.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KGManhattanScript.ttf; sourceTree = "<group>"; };
 		2D976C5F1B84E69A00051514 /* SelfieLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfieLabel.swift; sourceTree = "<group>"; };
 		2D976C611B85146B00051514 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
 		2D976C621B85146B00051514 /* Oswald-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-BoldItalic.ttf"; sourceTree = "<group>"; };
-		2D976C631B85146B00051514 /* Oswald-Demi-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Demi-BoldItalic.ttf"; sourceTree = "<group>"; };
-		2D976C641B85146B00051514 /* Oswald-DemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-DemiBold.ttf"; sourceTree = "<group>"; };
 		2D976C651B85146B00051514 /* Oswald-Extra-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Extra-LightItalic.ttf"; sourceTree = "<group>"; };
 		2D976C661B85146B00051514 /* Oswald-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-ExtraLight.ttf"; sourceTree = "<group>"; };
 		2D976C671B85146B00051514 /* Oswald-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Heavy.ttf"; sourceTree = "<group>"; };
@@ -163,48 +130,23 @@
 		2D976C6C1B85146B00051514 /* Oswald-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-MediumItalic.ttf"; sourceTree = "<group>"; };
 		2D976C6D1B85146B00051514 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
 		2D976C6E1B85146B00051514 /* Oswald-RegularItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-RegularItalic.ttf"; sourceTree = "<group>"; };
-		2D976C701B85146B00051514 /* Marvel-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marvel-Bold.ttf"; sourceTree = "<group>"; };
-		2D976C711B85146B00051514 /* Marvel-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marvel-BoldItalic.ttf"; sourceTree = "<group>"; };
-		2D976C721B85146B00051514 /* Marvel-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marvel-Italic.ttf"; sourceTree = "<group>"; };
-		2D976C731B85146B00051514 /* Marvel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marvel-Regular.ttf"; sourceTree = "<group>"; };
-		2D976C741B85146B00051514 /* VarickaLC.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = VarickaLC.otf; sourceTree = "<group>"; };
-		2D976C751B85146B00051514 /* VarickaLC.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = VarickaLC.ttf; sourceTree = "<group>"; };
-		2D976C761B85146B00051514 /* VarickaSC.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = VarickaSC.otf; sourceTree = "<group>"; };
-		2D976C771B85146B00051514 /* VarickaSC.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = VarickaSC.ttf; sourceTree = "<group>"; };
-		2D976C781B85146B00051514 /* Movies.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Movies.ttf; sourceTree = "<group>"; };
-		2D976C791B85146B00051514 /* Montepetrum bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montepetrum bold.ttf"; sourceTree = "<group>"; };
-		2D976C7A1B85146B00051514 /* Montepetrum regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montepetrum regular.ttf"; sourceTree = "<group>"; };
-		2D976C7B1B85146B00051514 /* Montepetrum Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montepetrum Thin.ttf"; sourceTree = "<group>"; };
-		2D976C7C1B85146B00051514 /* Munich.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Munich.ttf; sourceTree = "<group>"; };
 		2DF6C0B31B7D0C3B0042AC87 /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		2DF6C0B51B7D0D4E0042AC87 /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 		2DF6C0B71B7E346F0042AC87 /* CluelessCloset-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CluelessCloset-Bridging-Header.h"; sourceTree = "<group>"; };
 		2DF6C0B81B7EB3BB0042AC87 /* CalendarLookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarLookTableViewCell.swift; sourceTree = "<group>"; };
 		2DF6C0BA1B7F32220042AC87 /* Carousel2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carousel2ViewController.swift; sourceTree = "<group>"; };
-		2DF6C0BC1B7F3E600042AC87 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		2DF6C0C21B7F46000042AC87 /* MyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLabel.swift; sourceTree = "<group>"; };
 		2DF6C0C41B7F5C450042AC87 /* SelfieButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfieButton.swift; sourceTree = "<group>"; };
 		2DF6C0C61B7F5E960042AC87 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2DF6C0C71B7F5E970042AC87 /* Paths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		2DF6C0C81B7F5E970042AC87 /* StarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarButton.swift; sourceTree = "<group>"; };
 		2DF6C0CD1B7F77BD0042AC87 /* SelfieButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfieButtonView.swift; sourceTree = "<group>"; };
-		2DF6C0CF1B7FEE500042AC87 /* AbrahamLincoln.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AbrahamLincoln.ttf; sourceTree = "<group>"; };
-		2DF6C0D11B7FF4320042AC87 /* BEBAS___.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEBAS___.ttf"; sourceTree = "<group>"; };
 		2DF6C0D21B7FF4320042AC87 /* BebasNeue Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Bold.ttf"; sourceTree = "<group>"; };
 		2DF6C0D31B7FF4320042AC87 /* BebasNeue Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Book.ttf"; sourceTree = "<group>"; };
 		2DF6C0D41B7FF4320042AC87 /* BebasNeue Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Light.ttf"; sourceTree = "<group>"; };
 		2DF6C0D51B7FF4320042AC87 /* BebasNeue Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Regular.ttf"; sourceTree = "<group>"; };
 		2DF6C0D61B7FF4320042AC87 /* BebasNeue Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Thin.ttf"; sourceTree = "<group>"; };
-		2DF6C0DD1B7FF4710042AC87 /* Big Surprise.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Big Surprise.ttf"; sourceTree = "<group>"; };
-		2DF6C0DE1B7FF4710042AC87 /* black_jack.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = black_jack.ttf; sourceTree = "<group>"; };
 		2DF6C0DF1B7FF4710042AC87 /* budmo jiggler.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "budmo jiggler.ttf"; sourceTree = "<group>"; };
-		2DF6C0E11B7FF4710042AC87 /* daisy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = daisy.ttf; sourceTree = "<group>"; };
-		2DF6C0E31B7FF4710042AC87 /* Demo_Delinquente_altI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Demo_Delinquente_altI.ttf; sourceTree = "<group>"; };
-		2DF6C0E51B7FF4710042AC87 /* gnuolane rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gnuolane rg.ttf"; sourceTree = "<group>"; };
-		2DF6C0EF1B7FF4B70042AC87 /* goudy_bookletter_1911-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "goudy_bookletter_1911-webfont.ttf"; sourceTree = "<group>"; };
-		2DF6C0F01B7FF4B70042AC87 /* HaloHandletter.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HaloHandletter.ttf; sourceTree = "<group>"; };
-		2DF6C0F31B7FF4B70042AC87 /* MarketingScript.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MarketingScript.ttf; sourceTree = "<group>"; };
-		2DF6C0F41B7FF4B70042AC87 /* PR8 Charade.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PR8 Charade.ttf"; sourceTree = "<group>"; };
 		2DF6C0FC1B801B2F0042AC87 /* UIColor+Flat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Flat.swift"; sourceTree = "<group>"; };
 		2DF6C0FE1B801B730042AC87 /* UIColor+Girly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Girly.swift"; sourceTree = "<group>"; };
 		44B031BB89160201B17918C4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -336,8 +278,6 @@
 			children = (
 				2D976C611B85146B00051514 /* Oswald-Bold.ttf */,
 				2D976C621B85146B00051514 /* Oswald-BoldItalic.ttf */,
-				2D976C631B85146B00051514 /* Oswald-Demi-BoldItalic.ttf */,
-				2D976C641B85146B00051514 /* Oswald-DemiBold.ttf */,
 				2D976C651B85146B00051514 /* Oswald-Extra-LightItalic.ttf */,
 				2D976C661B85146B00051514 /* Oswald-ExtraLight.ttf */,
 				2D976C671B85146B00051514 /* Oswald-Heavy.ttf */,
@@ -348,43 +288,16 @@
 				2D976C6C1B85146B00051514 /* Oswald-MediumItalic.ttf */,
 				2D976C6D1B85146B00051514 /* Oswald-Regular.ttf */,
 				2D976C6E1B85146B00051514 /* Oswald-RegularItalic.ttf */,
-				2D976C701B85146B00051514 /* Marvel-Bold.ttf */,
-				2D976C711B85146B00051514 /* Marvel-BoldItalic.ttf */,
-				2D976C721B85146B00051514 /* Marvel-Italic.ttf */,
-				2D976C731B85146B00051514 /* Marvel-Regular.ttf */,
-				2D976C741B85146B00051514 /* VarickaLC.otf */,
-				2D976C751B85146B00051514 /* VarickaLC.ttf */,
-				2D976C761B85146B00051514 /* VarickaSC.otf */,
-				2D976C771B85146B00051514 /* VarickaSC.ttf */,
-				2D976C781B85146B00051514 /* Movies.ttf */,
-				2D976C791B85146B00051514 /* Montepetrum bold.ttf */,
-				2D976C7A1B85146B00051514 /* Montepetrum regular.ttf */,
-				2D976C7B1B85146B00051514 /* Montepetrum Thin.ttf */,
-				2D976C7C1B85146B00051514 /* Munich.ttf */,
 				2D976C5D1B849B3800051514 /* KGManhattanScript.ttf */,
-				2D976C5B1B849B1F00051514 /* GreatVibes-Regular.otf */,
-				2D976C591B849B0400051514 /* clingy.ttf */,
 				2D976C3B1B848D7900051514 /* HoneyScript-Light.ttf */,
 				2D976C391B848D6400051514 /* HoneyScript-SemiBold.ttf */,
 				2D976C351B83EAB000051514 /* Mf Queen Leela.ttf */,
-				2DF6C0EF1B7FF4B70042AC87 /* goudy_bookletter_1911-webfont.ttf */,
-				2DF6C0F01B7FF4B70042AC87 /* HaloHandletter.ttf */,
-				2DF6C0F31B7FF4B70042AC87 /* MarketingScript.ttf */,
-				2DF6C0F41B7FF4B70042AC87 /* PR8 Charade.ttf */,
-				2DF6C0DD1B7FF4710042AC87 /* Big Surprise.ttf */,
-				2DF6C0DE1B7FF4710042AC87 /* black_jack.ttf */,
 				2DF6C0DF1B7FF4710042AC87 /* budmo jiggler.ttf */,
-				2DF6C0E11B7FF4710042AC87 /* daisy.ttf */,
-				2DF6C0E31B7FF4710042AC87 /* Demo_Delinquente_altI.ttf */,
-				2DF6C0E51B7FF4710042AC87 /* gnuolane rg.ttf */,
-				2DF6C0D11B7FF4320042AC87 /* BEBAS___.ttf */,
 				2DF6C0D21B7FF4320042AC87 /* BebasNeue Bold.ttf */,
 				2DF6C0D31B7FF4320042AC87 /* BebasNeue Book.ttf */,
 				2DF6C0D41B7FF4320042AC87 /* BebasNeue Light.ttf */,
 				2DF6C0D51B7FF4320042AC87 /* BebasNeue Regular.ttf */,
 				2DF6C0D61B7FF4320042AC87 /* BebasNeue Thin.ttf */,
-				2DF6C0CF1B7FEE500042AC87 /* AbrahamLincoln.ttf */,
-				2DF6C0BC1B7F3E600042AC87 /* Pacifico.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -452,6 +365,7 @@
 		2D2EF72E1B715BC3009D0F96 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = supernova8productions;
 				TargetAttributes = {
@@ -491,58 +405,29 @@
 			files = (
 				2D976C361B83EAB000051514 /* Mf Queen Leela.ttf in Resources */,
 				2D976C851B85146B00051514 /* Oswald-Light.ttf in Resources */,
-				2D976C8D1B85146B00051514 /* Marvel-BoldItalic.ttf in Resources */,
-				2DF6C0D01B7FEE500042AC87 /* AbrahamLincoln.ttf in Resources */,
 				2D976C7D1B85146B00051514 /* Oswald-Bold.ttf in Resources */,
-				2D976C5C1B849B1F00051514 /* GreatVibes-Regular.otf in Resources */,
-				2D976C941B85146B00051514 /* Movies.ttf in Resources */,
 				2D976C8A1B85146B00051514 /* Oswald-RegularItalic.ttf in Resources */,
 				2DF6C0DB1B7FF4320042AC87 /* BebasNeue Regular.ttf in Resources */,
 				2D2EF7431B715BC3009D0F96 /* Main.storyboard in Resources */,
 				2D2EF7481B715BC3009D0F96 /* LaunchScreen.xib in Resources */,
 				2DF6C0D91B7FF4320042AC87 /* BebasNeue Book.ttf in Resources */,
-				2D976C931B85146B00051514 /* VarickaSC.ttf in Resources */,
 				2D976C881B85146B00051514 /* Oswald-MediumItalic.ttf in Resources */,
 				2D976C3C1B848D7900051514 /* HoneyScript-Light.ttf in Resources */,
-				2DF6C0F91B7FF4B70042AC87 /* MarketingScript.ttf in Resources */,
-				2D976C8E1B85146B00051514 /* Marvel-Italic.ttf in Resources */,
-				2D976C951B85146B00051514 /* Montepetrum bold.ttf in Resources */,
 				2D976C831B85146B00051514 /* Oswald-Heavy.ttf in Resources */,
-				2D976C901B85146B00051514 /* VarickaLC.otf in Resources */,
-				2D976C7F1B85146B00051514 /* Oswald-Demi-BoldItalic.ttf in Resources */,
-				2DF6C0F61B7FF4B70042AC87 /* HaloHandletter.ttf in Resources */,
 				2D976C7E1B85146B00051514 /* Oswald-BoldItalic.ttf in Resources */,
 				2D976C871B85146B00051514 /* Oswald-Medium.ttf in Resources */,
 				2DF6C0D81B7FF4320042AC87 /* BebasNeue Bold.ttf in Resources */,
 				2D976C811B85146B00051514 /* Oswald-Extra-LightItalic.ttf in Resources */,
-				2D976C981B85146B00051514 /* Munich.ttf in Resources */,
-				2DF6C0EC1B7FF4710042AC87 /* Demo_Delinquente_altI.ttf in Resources */,
 				2DF6C0E81B7FF4710042AC87 /* budmo jiggler.ttf in Resources */,
-				2D976C971B85146B00051514 /* Montepetrum Thin.ttf in Resources */,
-				2DF6C0BD1B7F3E600042AC87 /* Pacifico.ttf in Resources */,
-				2DF6C0FA1B7FF4B70042AC87 /* PR8 Charade.ttf in Resources */,
 				2D976C821B85146B00051514 /* Oswald-ExtraLight.ttf in Resources */,
-				2DF6C0F51B7FF4B70042AC87 /* goudy_bookletter_1911-webfont.ttf in Resources */,
-				2DF6C0E71B7FF4710042AC87 /* black_jack.ttf in Resources */,
 				2D976C891B85146B00051514 /* Oswald-Regular.ttf in Resources */,
 				2D976C5E1B849B3800051514 /* KGManhattanScript.ttf in Resources */,
-				2D976C8C1B85146B00051514 /* Marvel-Bold.ttf in Resources */,
-				2DF6C0D71B7FF4320042AC87 /* BEBAS___.ttf in Resources */,
 				2D2EF7451B715BC3009D0F96 /* Images.xcassets in Resources */,
 				2DF6C0DC1B7FF4320042AC87 /* BebasNeue Thin.ttf in Resources */,
 				2D976C841B85146B00051514 /* Oswald-HeavyItalic.ttf in Resources */,
 				2DF6C0DA1B7FF4320042AC87 /* BebasNeue Light.ttf in Resources */,
-				2DF6C0EE1B7FF4710042AC87 /* gnuolane rg.ttf in Resources */,
 				2D976C3A1B848D6400051514 /* HoneyScript-SemiBold.ttf in Resources */,
-				2D976C801B85146B00051514 /* Oswald-DemiBold.ttf in Resources */,
-				2D976C5A1B849B0400051514 /* clingy.ttf in Resources */,
-				2DF6C0E61B7FF4710042AC87 /* Big Surprise.ttf in Resources */,
-				2D976C8F1B85146B00051514 /* Marvel-Regular.ttf in Resources */,
-				2D976C921B85146B00051514 /* VarickaSC.otf in Resources */,
-				2D976C961B85146B00051514 /* Montepetrum regular.ttf in Resources */,
-				2DF6C0EA1B7FF4710042AC87 /* daisy.ttf in Resources */,
 				2D976C861B85146B00051514 /* Oswald-LightItalic.ttf in Resources */,
-				2D976C911B85146B00051514 /* VarickaLC.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
